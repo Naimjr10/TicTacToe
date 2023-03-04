@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".GameFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        android:gravity="center_horizontal"
+        android:text="WonLostMessage"
+        android:textSize="36sp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/frame"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:src="@drawable/tic_tac_toe_bingkai"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/col_1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="40dp"
+            tools:src="@drawable/lingkaran"
+            app:layout_constraintBottom_toTopOf="@+id/col_4"
+            app:layout_constraintEnd_toStartOf="@+id/col_2" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/col_2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            tools:src="@drawable/silang"
+            app:layout_constraintBottom_toTopOf="@+id/col_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/frame" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/col_3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="40dp"
+            tools:src="@drawable/lingkaran"
+            app:layout_constraintBottom_toTopOf="@+id/col_6"
+            app:layout_constraintStart_toEndOf="@+id/col_2" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/col_4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="13dp"
+            tools:src="@drawable/silang"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/col_5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/col_5"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            tools:src="@drawable/lingkaran"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/frame" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/col_6"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="13dp"
+            tools:src="@drawable/silang"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/col_5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/col_7"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="40dp"
+            tools:src="@drawable/lingkaran"
+            app:layout_constraintEnd_toStartOf="@+id/col_8"
+            app:layout_constraintTop_toBottomOf="@+id/col_4" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/col_8"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            tools:src="@drawable/silang"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/col_5" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/col_9"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            tools:src="@drawable/lingkaran"
+            app:layout_constraintStart_toEndOf="@+id/col_8"
+            app:layout_constraintTop_toBottomOf="@+id/col_6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/new_game_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Start a new game" />
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
