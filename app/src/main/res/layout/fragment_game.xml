@@ -10,12 +10,13 @@
     tools:context=".GameFragment">
 
     <TextView
+        android:id="@+id/won_lost_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="50dp"
         android:gravity="center_horizontal"
-        android:text="WonLostMessage"
+        tools:text="WonLostMessage"
         android:textSize="36sp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout

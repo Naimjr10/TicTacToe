@@ -9,9 +9,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.nandro.tictactoe.databinding.FragmentChooseBinding
+import kotlin.properties.Delegates
 
 class ChooseFragment : Fragment() {
 lateinit var binding: FragmentChooseBinding
+
+companion object {
+    var circleIsSelectedFirst = false
+    var crossIsSelectedFirst = false
+}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,18 +28,35 @@ lateinit var binding: FragmentChooseBinding
         val view = binding.root
 
         binding.circleRadio.setOnClickListener {
-            Toast.makeText(activity, "I got clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Circle first", Toast.LENGTH_SHORT).show()
+            circleIsSelectedFirst = true
+            crossIsSelectedFirst = false
         }
 
         binding.crossRadio.setOnClickListener {
-            Toast.makeText(activity, "I got clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Cross first", Toast.LENGTH_SHORT).show()
+            crossIsSelectedFirst = true
+            circleIsSelectedFirst = false
         }
 
         binding.playButton.setOnClickListener {
-            findNavController().navigate(R.id.action_chooseFragment_to_gameFragment)
+            if (crossIsSelectedFirst || circleIsSelectedFirst) {
+                findNavController().navigate(R.id.action_chooseFragment_to_gameFragment)
+            } else {
+                Toast.makeText(activity, "Please select at least one", Toast.LENGTH_SHORT).show()
+            }
         }
 
         return view
     }
+
+/*
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Toast.makeText(activity, "I got destroyed", Toast.LENGTH_SHORT).show()
+        isCircleSelectedFirst = false
+        isCrossSelectedFirst = false
+    }
+ */
 
 }
