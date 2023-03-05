@@ -54,8 +54,8 @@ companion object {
     override fun onDestroyView() {
         super.onDestroyView()
         Toast.makeText(activity, "I got destroyed", Toast.LENGTH_SHORT).show()
-        isCircleSelectedFirst = false
-        isCrossSelectedFirst = false
+        circleIsSelectedFirst = false
+        crossIsSelectedFirst = false
     }
  */
 

@@ -12,7 +12,7 @@
         android:id="@+id/choose_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose one of two options below"
+        android:text="Choose\n which one first"
         android:textSize="36sp"
         android:gravity="center_horizontal"/>
 

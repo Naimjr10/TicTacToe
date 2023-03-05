@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.nandro.tictactoe.ChooseFragment.Companion.circleIsSelectedFirst
+import com.nandro.tictactoe.ChooseFragment.Companion.crossIsSelectedFirst
 import com.nandro.tictactoe.databinding.FragmentGameBinding
 import kotlin.properties.Delegates
 
@@ -48,9 +50,9 @@ class GameFragment : Fragment() {
             if (column1IsEmpty) {
                 binding.col1.setImageResource(generateImage())
                 if (onTurn == "Circle") {
-                    column1isFilledBy = "Circle"
-                } else {
                     column1isFilledBy = "Cross"
+                } else {
+                    column1isFilledBy = "Circle"
                 }
                 column1IsEmpty = false
             }
@@ -64,9 +66,9 @@ class GameFragment : Fragment() {
             if (column2IsEmpty) {
                 binding.col2.setImageResource(generateImage())
                 if (onTurn == "Circle") {
-                    column2isFilledBy = "Circle"
-                } else {
                     column2isFilledBy = "Cross"
+                } else {
+                    column2isFilledBy = "Circle"
                 }
                 column2IsEmpty = false
             }
@@ -79,9 +81,9 @@ class GameFragment : Fragment() {
             if (column3IsEmpty) {
                 binding.col3.setImageResource(generateImage())
                 if (onTurn == "Circle") {
-                    column3isFilledBy = "Circle"
-                } else {
                     column3isFilledBy = "Cross"
+                } else {
+                    column3isFilledBy = "Circle"
                 }
                 column3IsEmpty = false
             }
@@ -94,9 +96,9 @@ class GameFragment : Fragment() {
             if (column4IsEmpty) {
                 binding.col4.setImageResource(generateImage())
                 if (onTurn == "Circle") {
-                    column4isFilledBy = "Circle"
-                } else {
                     column4isFilledBy = "Cross"
+                } else {
+                    column4isFilledBy = "Circle"
                 }
                 column4IsEmpty = false
             }
@@ -109,9 +111,9 @@ class GameFragment : Fragment() {
             if (column5IsEmpty) {
                 binding.col5.setImageResource(generateImage())
                 if (onTurn == "Circle") {
-                    column5isFilledBy = "Circle"
-                } else {
                     column5isFilledBy = "Cross"
+                } else {
+                    column5isFilledBy = "Circle"
                 }
                 column5IsEmpty = false
             }
@@ -124,9 +126,9 @@ class GameFragment : Fragment() {
             if (column6IsEmpty) {
                 binding.col6.setImageResource(generateImage())
                 if (onTurn == "Circle") {
-                    column6isFilledBy = "Circle"
-                } else {
                     column6isFilledBy = "Cross"
+                } else {
+                    column6isFilledBy = "Circle"
                 }
                 column6IsEmpty = false
             }
@@ -139,9 +141,9 @@ class GameFragment : Fragment() {
             if (column7IsEmpty) {
                 binding.col7.setImageResource(generateImage())
                 if (onTurn == "Circle") {
-                    column7isFilledBy = "Circle"
-                } else {
                     column7isFilledBy = "Cross"
+                } else {
+                    column7isFilledBy = "Circle"
                 }
                 column7IsEmpty = false
             }
@@ -154,9 +156,9 @@ class GameFragment : Fragment() {
             if (column8IsEmpty) {
                 binding.col8.setImageResource(generateImage())
                 if (onTurn == "Circle") {
-                    column8isFilledBy = "Circle"
-                } else {
                     column8isFilledBy = "Cross"
+                } else {
+                    column8isFilledBy = "Circle"
                 }
                 column8IsEmpty = false
             }
@@ -169,9 +171,9 @@ class GameFragment : Fragment() {
             if (column9IsEmpty) {
                 binding.col9.setImageResource(generateImage())
                 if (onTurn == "Circle") {
-                    column9isFilledBy = "Circle"
-                } else {
                     column9isFilledBy = "Cross"
+                } else {
+                    column9isFilledBy = "Circle"
                 }
                 column9IsEmpty = false
             }
@@ -185,6 +187,13 @@ class GameFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Toast.makeText(activity, "I got destroyed", Toast.LENGTH_SHORT).show()
+        circleIsSelectedFirst = false
+        crossIsSelectedFirst = false
     }
 
     fun generateImage(): Int {

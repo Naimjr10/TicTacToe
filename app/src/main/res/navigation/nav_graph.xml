@@ -22,6 +22,9 @@
         tools:layout="@layout/fragment_game" >
         <action
             android:id="@+id/action_gameFragment_to_chooseFragment"
-            app:destination="@id/chooseFragment" />
+            app:destination="@id/chooseFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>
