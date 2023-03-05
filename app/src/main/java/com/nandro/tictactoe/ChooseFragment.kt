@@ -28,13 +28,13 @@ companion object {
         val view = binding.root
 
         binding.circleRadio.setOnClickListener {
-            Toast.makeText(activity, "Circle first", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "Circle first", Toast.LENGTH_SHORT).show()
             circleIsSelectedFirst = true
             crossIsSelectedFirst = false
         }
 
         binding.crossRadio.setOnClickListener {
-            Toast.makeText(activity, "Cross first", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "Cross first", Toast.LENGTH_SHORT).show()
             crossIsSelectedFirst = true
             circleIsSelectedFirst = false
         }

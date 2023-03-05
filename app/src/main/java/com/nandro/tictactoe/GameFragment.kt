@@ -56,7 +56,7 @@ class GameFragment : Fragment() {
                 }
                 column1IsEmpty = false
             }
-            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
             isFinish()
 
         }
@@ -72,7 +72,7 @@ class GameFragment : Fragment() {
                 }
                 column2IsEmpty = false
             }
-            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
             isFinish()
         }
 
@@ -87,7 +87,7 @@ class GameFragment : Fragment() {
                 }
                 column3IsEmpty = false
             }
-            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
             isFinish()
         }
 
@@ -102,7 +102,7 @@ class GameFragment : Fragment() {
                 }
                 column4IsEmpty = false
             }
-            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
             isFinish()
         }
 
@@ -117,7 +117,7 @@ class GameFragment : Fragment() {
                 }
                 column5IsEmpty = false
             }
-            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
             isFinish()
         }
 
@@ -132,7 +132,7 @@ class GameFragment : Fragment() {
                 }
                 column6IsEmpty = false
             }
-            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
             isFinish()
         }
 
@@ -147,7 +147,7 @@ class GameFragment : Fragment() {
                 }
                 column7IsEmpty = false
             }
-            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
             isFinish()
         }
 
@@ -162,7 +162,7 @@ class GameFragment : Fragment() {
                 }
                 column8IsEmpty = false
             }
-            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
             isFinish()
         }
 
@@ -177,7 +177,7 @@ class GameFragment : Fragment() {
                 }
                 column9IsEmpty = false
             }
-            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$onTurn", Toast.LENGTH_SHORT).show()
             isFinish()
         }
 
@@ -191,7 +191,7 @@ class GameFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Toast.makeText(activity, "I got destroyed", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(activity, "I got destroyed", Toast.LENGTH_SHORT).show()
         circleIsSelectedFirst = false
         crossIsSelectedFirst = false
     }
@@ -230,7 +230,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Circle Won"
             onTurn = ""
-            Toast.makeText(activity, "$column1isFilledBy $column2isFilledBy $column3isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column1isFilledBy $column2isFilledBy $column3isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column4isFilledBy == "Circle" && column5isFilledBy == "Circle" && column6isFilledBy == "Circle") {
@@ -246,7 +246,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Circle Won"
             onTurn = ""
-            Toast.makeText(activity, "$column4isFilledBy $column5isFilledBy $column6isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column4isFilledBy $column5isFilledBy $column6isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column7isFilledBy == "Circle" && column8isFilledBy == "Circle" && column9isFilledBy == "Circle") {
@@ -262,7 +262,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Circle Won"
             onTurn = ""
-            Toast.makeText(activity, "$column7isFilledBy $column8isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column7isFilledBy $column8isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column1isFilledBy == "Circle" && column4isFilledBy == "Circle" && column7isFilledBy == "Circle") {
@@ -278,7 +278,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Circle Won"
             onTurn = ""
-            Toast.makeText(activity, "$column1isFilledBy $column4isFilledBy $column7isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column1isFilledBy $column4isFilledBy $column7isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column2isFilledBy == "Circle" && column5isFilledBy == "Circle" && column8isFilledBy == "Circle") {
@@ -294,7 +294,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Circle Won"
             onTurn = ""
-            Toast.makeText(activity, "$column2isFilledBy $column5isFilledBy $column8isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column2isFilledBy $column5isFilledBy $column8isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column3isFilledBy == "Circle" && column6isFilledBy == "Circle" && column9isFilledBy == "Circle") {
@@ -310,7 +310,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Circle Won"
             onTurn = ""
-            Toast.makeText(activity, "$column3isFilledBy $column6isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column3isFilledBy $column6isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column1isFilledBy == "Circle" && column5isFilledBy == "Circle" && column9isFilledBy == "Circle") {
@@ -326,7 +326,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Circle Won"
             onTurn = ""
-            Toast.makeText(activity, "$column1isFilledBy $column5isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column1isFilledBy $column5isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column3isFilledBy == "Circle" && column5isFilledBy == "Circle" && column7isFilledBy == "Circle") {
@@ -342,7 +342,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Circle Won"
             onTurn = ""
-            Toast.makeText(activity, "$column3isFilledBy $column5isFilledBy $column7isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column3isFilledBy $column5isFilledBy $column7isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
 //------------------------------------------------------------------------------------------------------------//
@@ -360,7 +360,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Cross Won"
             onTurn = ""
-            Toast.makeText(activity, "$column1isFilledBy $column2isFilledBy $column3isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column1isFilledBy $column2isFilledBy $column3isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column4isFilledBy == "Cross" && column5isFilledBy == "Cross" && column6isFilledBy == "Cross") {
@@ -376,7 +376,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Cross Won"
             onTurn = ""
-            Toast.makeText(activity, "$column4isFilledBy $column5isFilledBy $column6isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column4isFilledBy $column5isFilledBy $column6isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column7isFilledBy == "Cross" && column8isFilledBy == "Cross" && column9isFilledBy == "Cross") {
@@ -392,7 +392,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Cross Won"
             onTurn = ""
-            Toast.makeText(activity, "$column7isFilledBy $column8isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column7isFilledBy $column8isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column1isFilledBy == "Cross" && column4isFilledBy == "Cross" && column7isFilledBy == "Cross") {
@@ -408,7 +408,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Cross Won"
             onTurn = ""
-            Toast.makeText(activity, "$column1isFilledBy $column4isFilledBy $column7isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column1isFilledBy $column4isFilledBy $column7isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column2isFilledBy == "Cross" && column5isFilledBy == "Cross" && column8isFilledBy == "Cross") {
@@ -424,7 +424,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Cross Won"
             onTurn = ""
-            Toast.makeText(activity, "$column2isFilledBy $column5isFilledBy $column8isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column2isFilledBy $column5isFilledBy $column8isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column3isFilledBy == "Cross" && column6isFilledBy == "Cross" && column9isFilledBy == "Cross") {
@@ -440,7 +440,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Cross Won"
             onTurn = ""
-            Toast.makeText(activity, "$column3isFilledBy $column6isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column3isFilledBy $column6isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column1isFilledBy == "Cross" && column5isFilledBy == "Cross" && column9isFilledBy == "Cross") {
@@ -456,7 +456,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Cross Won"
             onTurn = ""
-            Toast.makeText(activity, "$column1isFilledBy $column5isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column1isFilledBy $column5isFilledBy $column9isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column3isFilledBy == "Cross" && column5isFilledBy == "Cross" && column7isFilledBy == "Cross") {
@@ -472,7 +472,7 @@ class GameFragment : Fragment() {
 
             binding.wonLostMessage.text = "Cross Won"
             onTurn = ""
-            Toast.makeText(activity, "$column3isFilledBy $column5isFilledBy $column7isFilledBy", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity, "$column3isFilledBy $column5isFilledBy $column7isFilledBy", Toast.LENGTH_SHORT).show()
         }
 
         if (column1IsEmpty == false && column2IsEmpty == false && column3IsEmpty == false &&
