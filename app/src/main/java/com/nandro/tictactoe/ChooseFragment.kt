@@ -7,56 +7,52 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import com.nandro.tictactoe.databinding.FragmentChooseBinding
 import kotlin.properties.Delegates
 
 class ChooseFragment : Fragment() {
-lateinit var binding: FragmentChooseBinding
+    private var binding: FragmentChooseBinding? = null
 
-companion object {
-    var circleIsSelectedFirst = false
-    var crossIsSelectedFirst = false
-}
+    companion object {
+        var isCircleFirst: Boolean? = null
+        var isCrossFirst: Boolean? = null
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentChooseBinding.inflate(inflater, container, false)
-        val view = binding.root
+        return binding!!.root
+    }
 
-        binding.circleRadio.setOnClickListener {
-//            Toast.makeText(activity, "Circle first", Toast.LENGTH_SHORT).show()
-            circleIsSelectedFirst = true
-            crossIsSelectedFirst = false
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding!!.circleRadio.setOnClickListener {
+            isCircleFirst = true
+            isCrossFirst = false
         }
 
-        binding.crossRadio.setOnClickListener {
-//            Toast.makeText(activity, "Cross first", Toast.LENGTH_SHORT).show()
-            crossIsSelectedFirst = true
-            circleIsSelectedFirst = false
+        binding!!.crossRadio.setOnClickListener {
+            isCrossFirst = true
+            isCircleFirst = false
         }
 
-        binding.playButton.setOnClickListener {
-            if (crossIsSelectedFirst || circleIsSelectedFirst) {
+        binding!!.playButton.setOnClickListener {
+            if (isCircleFirst != null || isCrossFirst != null) {
                 findNavController().navigate(R.id.action_chooseFragment_to_gameFragment)
             } else {
-                Toast.makeText(activity, "Please select at least one", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Please select at least one", Toast.LENGTH_SHORT).show()
             }
         }
-
-        return view
     }
 
-/*
     override fun onDestroyView() {
         super.onDestroyView()
-        Toast.makeText(activity, "I got destroyed", Toast.LENGTH_SHORT).show()
-        circleIsSelectedFirst = false
-        crossIsSelectedFirst = false
+        binding = null
     }
- */
 
 }

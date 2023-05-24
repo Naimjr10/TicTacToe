@@ -20,11 +20,12 @@
         android:textSize="36sp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frame_constraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/frame"
+            android:id="@+id/frame_image"
             android:layout_width="400dp"
             android:layout_height="400dp"
             android:src="@drawable/tic_tac_toe_bingkai"
@@ -47,11 +48,11 @@
             android:id="@+id/col_2"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            tools:src="@drawable/silang"
+            android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toTopOf="@+id/col_5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frame" />
+            tools:src="@drawable/silang" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/col_3"
@@ -67,12 +68,11 @@
             android:id="@+id/col_4"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginEnd="13dp"
-            tools:src="@drawable/silang"
+            android:layout_marginEnd="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/col_5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/silang" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/col_5"
@@ -82,18 +82,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frame" />
+            app:layout_constraintTop_toTopOf="@+id/frame_constraint" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/col_6"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginStart="13dp"
-            tools:src="@drawable/silang"
+            android:layout_marginStart="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/col_5"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/silang" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/col_7"
@@ -109,11 +108,11 @@
             android:id="@+id/col_8"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            tools:src="@drawable/silang"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/col_5" />
+            app:layout_constraintTop_toBottomOf="@+id/col_5"
+            tools:src="@drawable/silang" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/col_9"
