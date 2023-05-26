@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center|center_vertical"
     android:orientation="vertical"
     android:padding="8dp"
     tools:context=".GameFragment">
@@ -16,8 +16,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="50dp"
         android:gravity="center_horizontal"
-        tools:text="WonLostMessage"
-        android:textSize="36sp"/>
+        android:textSize="36sp"
+        tools:text="WonLostMessage" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frame_constraint"
@@ -28,6 +28,7 @@
             android:id="@+id/frame_image"
             android:layout_width="400dp"
             android:layout_height="400dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/tic_tac_toe_bingkai"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,9 +41,9 @@
             android:layout_height="80dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="40dp"
-            tools:src="@drawable/lingkaran"
             app:layout_constraintBottom_toTopOf="@+id/col_4"
-            app:layout_constraintEnd_toStartOf="@+id/col_2" />
+            app:layout_constraintEnd_toStartOf="@+id/col_2"
+            tools:src="@drawable/lingkaran" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/col_2"
@@ -60,9 +61,9 @@
             android:layout_height="80dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="40dp"
-            tools:src="@drawable/lingkaran"
             app:layout_constraintBottom_toTopOf="@+id/col_6"
-            app:layout_constraintStart_toEndOf="@+id/col_2" />
+            app:layout_constraintStart_toEndOf="@+id/col_2"
+            tools:src="@drawable/lingkaran" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/col_4"
@@ -78,11 +79,11 @@
             android:id="@+id/col_5"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            tools:src="@drawable/lingkaran"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/frame_constraint" />
+            app:layout_constraintTop_toTopOf="@+id/frame_constraint"
+            tools:src="@drawable/lingkaran" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/col_6"
@@ -100,9 +101,9 @@
             android:layout_height="80dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
-            tools:src="@drawable/lingkaran"
             app:layout_constraintEnd_toStartOf="@+id/col_8"
-            app:layout_constraintTop_toBottomOf="@+id/col_4" />
+            app:layout_constraintTop_toBottomOf="@+id/col_4"
+            tools:src="@drawable/lingkaran" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/col_8"
@@ -120,9 +121,9 @@
             android:layout_height="80dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
-            tools:src="@drawable/lingkaran"
             app:layout_constraintStart_toEndOf="@+id/col_8"
-            app:layout_constraintTop_toBottomOf="@+id/col_6" />
+            app:layout_constraintTop_toBottomOf="@+id/col_6"
+            tools:src="@drawable/lingkaran" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -132,7 +133,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="Start a new game" />
-
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

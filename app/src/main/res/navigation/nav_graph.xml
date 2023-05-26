@@ -3,28 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/chooseFragment">
+    app:startDestination="@id/mainMenuFragment">
 
     <fragment
-        android:id="@+id/chooseFragment"
-        android:name="com.nandro.tictactoe.ChooseFragment"
-        android:label="fragment_choose"
-        tools:layout="@layout/fragment_choose" >
+        android:id="@+id/mainMenuFragment"
+        android:name="com.nandro.tictactoe.MainMenuFragment"
+        android:label="fragment_main_menu"
+        tools:layout="@layout/fragment_main_menu" >
         <action
-            android:id="@+id/action_chooseFragment_to_gameFragment"
-            app:destination="@id/gameFragment"
-            app:popUpTo="@id/chooseFragment" />
+            android:id="@+id/action_mainMenuFragment_to_gameSettingFragment"
+            app:destination="@id/gameSettingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/gameFragment"
-        android:name="com.nandro.tictactoe.GameFragment"
-        android:label="fragment_game"
-        tools:layout="@layout/fragment_game" >
-        <action
-            android:id="@+id/action_gameFragment_to_chooseFragment"
-            app:destination="@id/chooseFragment"
-            app:launchSingleTop="false"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="false" />
-    </fragment>
+        android:id="@+id/gameSettingFragment"
+        android:name="com.nandro.tictactoe.PvP.GameSettingFragment"
+        android:label="fragment_pvp_game_setting"
+        tools:layout="@layout/fragment_pvp_game_setting" />
 </navigation>
