@@ -7,7 +7,7 @@
     android:gravity="center|center_vertical"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".GameFragment">
+    android:background="@color/dark_cyan">
 
     <TextView
         android:id="@+id/won_lost_message"
@@ -29,7 +29,7 @@
             android:layout_width="400dp"
             android:layout_height="400dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/tic_tac_toe_bingkai"
+            android:src="@drawable/tic_tac_toe_bingkai_putih"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

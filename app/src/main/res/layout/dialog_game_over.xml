@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@color/dark_cyan"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/game_over_text"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Draw!!"
+        android:textColor="@color/white"
+        android:textSize="48sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/main_menu_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Main Menu" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/new_game_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="New Game" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

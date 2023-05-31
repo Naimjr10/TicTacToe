@@ -6,7 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_cyan"
-    tools:context=".MainMenuFragment">
+    tools:context=".MainMenuFragment"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
@@ -23,9 +32,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:text="player vs player"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/p_vs_com_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/p_vs_com_button"
@@ -33,8 +44,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="200dp"
         android:text="player vs computer"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

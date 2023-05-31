@@ -18,5 +18,25 @@
         android:id="@+id/gameSettingFragment"
         android:name="com.nandro.tictactoe.PvP.GameSettingFragment"
         android:label="fragment_pvp_game_setting"
-        tools:layout="@layout/fragment_pvp_game_setting" />
+        tools:layout="@layout/fragment_pvp_game_setting" >
+        <action
+            android:id="@+id/action_gameSettingFragment_to_gameplayFragment"
+            app:destination="@id/gameplayFragment"
+            app:popUpTo="@id/mainMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameplayFragment"
+        android:name="com.nandro.tictactoe.PvP.GameplayFragment"
+        android:label="fragment_pvp_gameplay"
+        tools:layout="@layout/fragment_pvp_gameplay" >
+        <action
+            android:id="@+id/action_gameplayFragment_to_gameSettingFragment"
+            app:destination="@id/gameSettingFragment"
+            app:popUpTo="@id/mainMenuFragment" />
+        <action
+            android:id="@+id/action_gameplayFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment"
+            app:popUpTo="@id/mainMenuFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

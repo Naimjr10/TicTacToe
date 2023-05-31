@@ -6,15 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PvP.GameSettingFragment"
-    >
+    android:background="@color/dark_cyan">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/who_first_text"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="Who First ?"
+        android:textColor="@color/white"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,11 +40,13 @@
         app:layout_constraintTop_toBottomOf="@id/who_first_text">
 
         <RadioButton
-            android:id="@+id/P1_radio_button"
+            android:id="@+id/p1_radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:buttonTint="@color/white"
             android:text="Player 1"
+            android:textColor="@color/white"
             android:textSize="24sp" />
 
         <RadioButton
@@ -43,7 +54,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:buttonTint="@color/white"
             android:text="Player 2"
+            android:textColor="@color/white"
             android:textSize="24sp" />
 
     </RadioGroup>
@@ -53,11 +66,11 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.1"
+        android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="Please, Choose your character\n player 1 or player 2"
+        android:text="Please, Choose your character\n "
+        android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@id/image_and_radio_wrapper"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/who_first_radio_group" />
@@ -66,12 +79,12 @@
         android:id="@+id/image_and_radio_wrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:alpha="0.1"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choose_char_text">
 
         <RadioGroup
             android:id="@+id/choose_char_radio_group"
@@ -83,13 +96,15 @@
                 android:id="@+id/cross_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="80dp" />
+                android:layout_marginBottom="80dp"
+                android:buttonTint="@color/white" />
 
             <RadioButton
                 android:id="@+id/circle_radio_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp" />
+                android:layout_marginTop="80dp"
+                android:buttonTint="@color/white" />
 
         </RadioGroup>
 
@@ -102,8 +117,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/cross_image"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_marginBottom="20dp"
                 android:src="@drawable/silang" />
 
@@ -114,17 +129,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
                 android:text="OR"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/circle_image"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:src="@drawable/lingkaran" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm_button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@color/white"
+        android:text="Confirm"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
