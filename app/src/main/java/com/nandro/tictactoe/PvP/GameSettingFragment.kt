@@ -1,33 +1,22 @@
 package com.nandro.tictactoe.PvP
 
-import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import android.widget.Toast
-import androidx.activity.OnBackPressedDispatcher
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import com.nandro.tictactoe.R
 import com.nandro.tictactoe.databinding.FragmentPvpGameSettingBinding
 
 class GameSettingFragment : Fragment() {
     companion object GameSetting {
-        var firstPlay = MutableLiveData<String>("")
+        var firstPlay = MutableLiveData("")
         var player1CharGame = ""
         var player2CharGame = ""
         const val CROSS_CHAR = "Cross"

@@ -1,6 +1,7 @@
 package com.nandro.tictactoe.PvP
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,28 +16,33 @@ import androidx.navigation.fragment.findNavController
 import com.nandro.tictactoe.R
 import com.nandro.tictactoe.databinding.FragmentPvpGameplayBinding
 import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting
+import java.io.File
 
 class GameplayFragment : Fragment() {
-    var binding: FragmentPvpGameplayBinding? = null
-    var onTurn = ""
-    val isColumnsEmpty = mutableListOf<Boolean>()
-    val columnsFilledBy = mutableListOf<String>()
-    var theWinner = ""
-    
+    private var binding: FragmentPvpGameplayBinding? = null
+    private var onTurn = ""
+    private val isColumnsEmpty = mutableListOf<Boolean>()
+    private val columnsFilledBy = mutableListOf<String>()
+    private var theWinner = ""
+
+    private val p1WinsFileName = "P1_num_of_wins"
+    private val p1LosesFileName = "P1_num_of_loses"
+    private val p2WinsFileName = "P2_num_of_wins"
+    private val p2LosesFileName = "P2_num_of_loses"
+
+    private lateinit var p1NumOfWins: String
+    private lateinit var p1NumOfLoses: String
+    private lateinit var p2NumOfWins: String
+    private lateinit var p2NumOfLoses: String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("GameplayFragment", "created")
 
-        repeat(9) {
-            isColumnsEmpty.add(true)
-            columnsFilledBy.add("")
-        }
-        if (GameSetting.firstPlay.value == GameSetting.PLAYER_1) {
-            onTurn = GameSetting.PLAYER_1
-        }
-        if (GameSetting.firstPlay.value == GameSetting.PLAYER_2) {
-            onTurn = GameSetting.PLAYER_2
-        }
+        // Create files if the files don't exist
+        createFiles()
+        initState()
     }
 
     override fun onCreateView(
@@ -45,6 +51,7 @@ class GameplayFragment : Fragment() {
     ): View {
         binding = FragmentPvpGameplayBinding.inflate(inflater, container, false)
         updatePlayersProfile()
+        updatePlayersCharImage()
 
         return binding!!.root
     }
@@ -84,6 +91,8 @@ class GameplayFragment : Fragment() {
                 if (isGameOver()) {
                     Log.d("isGameOver", "${isGameOver()}")
                     makeGameplayNotClickable()
+                    saveState()
+                    updatePlayersProfile()
                     prompt()
                 }
 
@@ -122,6 +131,8 @@ class GameplayFragment : Fragment() {
                 if (isGameOver()) {
                     Log.d("isGameOver", "${isGameOver()}")
                     makeGameplayNotClickable()
+                    saveState()
+                    updatePlayersProfile()
                     prompt()
                 }
             }
@@ -159,6 +170,8 @@ class GameplayFragment : Fragment() {
                 if (isGameOver()) {
                     Log.d("isGameOver", "${isGameOver()}")
                     makeGameplayNotClickable()
+                    saveState()
+                    updatePlayersProfile()
                     prompt()
                 }
             }
@@ -196,6 +209,8 @@ class GameplayFragment : Fragment() {
                 if (isGameOver()) {
                     Log.d("isGameOver", "${isGameOver()}")
                     makeGameplayNotClickable()
+                    saveState()
+                    updatePlayersProfile()
                     prompt()
                 }
             }
@@ -233,6 +248,8 @@ class GameplayFragment : Fragment() {
                 if (isGameOver()) {
                     Log.d("isGameOver", "${isGameOver()}")
                     makeGameplayNotClickable()
+                    saveState()
+                    updatePlayersProfile()
                     prompt()
                 }
             }
@@ -271,6 +288,8 @@ class GameplayFragment : Fragment() {
                 if (isGameOver()) {
                     Log.d("isGameOver", "${isGameOver()}")
                     makeGameplayNotClickable()
+                    saveState()
+                    updatePlayersProfile()
                     prompt()
                 }
             }
@@ -308,6 +327,8 @@ class GameplayFragment : Fragment() {
                 if (isGameOver()) {
                     Log.d("isGameOver", "${isGameOver()}")
                     makeGameplayNotClickable()
+                    saveState()
+                    updatePlayersProfile()
                     prompt()
                 }
             }
@@ -345,6 +366,8 @@ class GameplayFragment : Fragment() {
                 if (isGameOver()) {
                     Log.d("isGameOver", "${isGameOver()}")
                     makeGameplayNotClickable()
+                    saveState()
+                    updatePlayersProfile()
                     prompt()
                 }
             }
@@ -382,8 +405,11 @@ class GameplayFragment : Fragment() {
                 if (isGameOver()) {
                     Log.d("isGameOver", "${isGameOver()}")
                     makeGameplayNotClickable()
+                    saveState()
+                    updatePlayersProfile()
                     prompt()
-                }            }
+                }
+            }
         }
 
         binding!!.newGameButton.setOnClickListener {
@@ -473,13 +499,8 @@ class GameplayFragment : Fragment() {
             setContentView(R.layout.dialog_game_over)
             window!!.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL)
             val gameOverText = findViewById<AppCompatTextView>(R.id.game_over_text)
-            if (theWinner != "") {
-                if (theWinner == GameSetting.PLAYER_1) {
-                    gameOverText.text = "Player 1 win!!"
-                }
-                if (theWinner == GameSetting.PLAYER_2) {
-                    gameOverText.text = "Player 2 win!!"
-                }
+            if (isThereAWinner()) {
+                gameOverText.text = "${whoIsTheWinner()} win!!"
             } else {
                 gameOverText.text = "Draw!!"
             }
@@ -510,6 +531,14 @@ class GameplayFragment : Fragment() {
     }
 
     private fun updatePlayersProfile() {
+        binding!!.player1WinsText.text = "- Wins : $p1NumOfWins"
+        binding!!.player1LosesText.text = "- Loses : $p1NumOfLoses"
+        binding!!.player2WinsText.text = "- Wins : $p2NumOfWins"
+        binding!!.player2LosesText.text = "- Loses : $p2NumOfLoses"
+    }
+
+    private fun updatePlayersCharImage() {
+
         if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
             binding!!.player1CharImage.setImageResource(R.drawable.lingkaran)
         }
@@ -523,12 +552,73 @@ class GameplayFragment : Fragment() {
         if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
             binding!!.player2CharImage.setImageResource(R.drawable.silang)
         }
+
     }
 
     private fun isThereAWinner(): Boolean {
         return theWinner != ""
     }
 
+    private fun whoIsTheWinner(): String {
+        return if (theWinner == GameSetting.PLAYER_1)
+            GameSetting.PLAYER_1 else GameSetting.PLAYER_2
+    }
+
+    private fun saveState() {
+        if (theWinner == GameSetting.PLAYER_1) {
+            p1NumOfWins = (p1NumOfWins.toInt() + 1).toString()
+            requireContext().openFileOutput(p1WinsFileName, Context.MODE_PRIVATE).write(p1NumOfWins.toByteArray())
+
+            p2NumOfLoses = (p2NumOfLoses.toInt() + 1).toString()
+            requireContext().openFileOutput(p2LosesFileName, Context.MODE_PRIVATE).write(p2NumOfLoses.toByteArray())
+        }
+
+        if (theWinner == GameSetting.PLAYER_2) {
+            p2NumOfWins = (p2NumOfWins.toInt() + 1).toString()
+            requireContext().openFileOutput(p2WinsFileName, Context.MODE_PRIVATE).write(p2NumOfWins.toByteArray())
+
+            p1NumOfLoses = (p1NumOfLoses.toInt() + 1).toString()
+            requireContext().openFileOutput(p1LosesFileName, Context.MODE_PRIVATE).write(p1NumOfLoses.toByteArray())
+        }
+    }
+
+    private fun initState() {
+        p1NumOfWins = requireContext().openFileInput(p1WinsFileName).reader().readText()
+        p1NumOfLoses = requireContext().openFileInput(p1LosesFileName).reader().readText()
+        p2NumOfWins = requireContext().openFileInput(p2WinsFileName).reader().readText()
+        p2NumOfLoses = requireContext().openFileInput(p2LosesFileName).reader().readText()
+
+        repeat(9) {
+            isColumnsEmpty.add(true)
+            columnsFilledBy.add("")
+        }
+        if (GameSetting.firstPlay.value == GameSetting.PLAYER_1) {
+            onTurn = GameSetting.PLAYER_1
+        }
+        if (GameSetting.firstPlay.value == GameSetting.PLAYER_2) {
+            onTurn = GameSetting.PLAYER_2
+        }
+    }
+    
+    private fun createFiles() {
+        if ( File(requireContext().filesDir, p1WinsFileName).createNewFile() ) {
+            requireContext().openFileOutput(p1WinsFileName, Context.MODE_PRIVATE)
+                .write("0".toByteArray())
+        }
+        if ( File(requireContext().filesDir, p1LosesFileName).createNewFile() ) {
+            requireContext().openFileOutput(p1LosesFileName, Context.MODE_PRIVATE)
+                .write("0".toByteArray())
+        }
+        if ( File(requireContext().filesDir, p2WinsFileName).createNewFile() ) {
+            requireContext().openFileOutput(p2WinsFileName, Context.MODE_PRIVATE)
+                .write("0".toByteArray())
+        }
+        if ( File(requireContext().filesDir, p2LosesFileName).createNewFile() ) {
+            requireContext().openFileOutput(p2LosesFileName, Context.MODE_PRIVATE)
+                .write("0".toByteArray())
+        }
+    }
+    
     override fun onDestroy() {
         super.onDestroy()
         Log.d("GameplayFragment", "destroyed")
