@@ -10,19 +10,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.navigation.fragment.findNavController
+import com.nandro.tictactoe.Column
 import com.nandro.tictactoe.R
 import com.nandro.tictactoe.databinding.FragmentPvpGameplayBinding
-import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting
+import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.PLAYER_2
+import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.PLAYER_1
+import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.player1CharGame
+import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.player2CharGame
+import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.CIRCLE_CHAR
+import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.CROSS_CHAR
+import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.firstPlay
 import java.io.File
 
 class GameplayFragment : Fragment() {
     private var binding: FragmentPvpGameplayBinding? = null
     private var onTurn = ""
-    private val isColumnsEmpty = mutableListOf<Boolean>()
-    private val columnsFilledBy = mutableListOf<String>()
     private var theWinner = ""
 
     private val p1WinsFileName = "P1_num_of_wins"
@@ -43,6 +48,8 @@ class GameplayFragment : Fragment() {
         // Create files if the files don't exist
         createFiles()
         initState()
+
+        Log.i("lifecycle", "${lifecycle.currentState}")
     }
 
     override fun onCreateView(
@@ -53,363 +60,148 @@ class GameplayFragment : Fragment() {
         updatePlayersProfile()
         updatePlayersCharImage()
 
+        Log.i("lifecycle", "${viewLifecycleOwner.lifecycle.currentState}")
         return binding!!.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding!!.col1.setOnClickListener {
-            Log.d("onTurn", onTurn)
-            Log.d("isColumn1Empty", "${isColumnsEmpty[0]}")
-            it as AppCompatImageView
-            if (isColumnsEmpty[0]) {
-                if (onTurn == GameSetting.PLAYER_1) {
-                    columnsFilledBy[0] = GameSetting.PLAYER_1
-                    Log.d("column1FilledBy", columnsFilledBy[0])
-                    onTurn = GameSetting.PLAYER_2
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player1CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                } else {
-                    columnsFilledBy[0] = GameSetting.PLAYER_2
-                    Log.d("column1FilledBy", columnsFilledBy[0])
-                    onTurn = GameSetting.PLAYER_1
-                    Log.d("onTurn", "onTurn = $onTurn")
-                    if (GameSetting.player2CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                }
-                isColumnsEmpty[0] = false
-                Log.d("isColumn1Empty", "${isColumnsEmpty[0]}")
-                if (isGameOver()) {
-                    Log.d("isGameOver", "${isGameOver()}")
-                    makeGameplayNotClickable()
-                    saveState()
-                    updatePlayersProfile()
-                    prompt()
-                }
+            it as Column
+            if (it.isEmpty) {
+                fillTheColumn(it)
+                it.isEmpty = false
+            }
+            if (isGameOver()) {
+                Log.d("isGameOver", "${isGameOver()}")
+                makeGameplayNotClickable()
+                saveState()
+                updatePlayersProfile()
+                prompt()
+            }
+            Log.i("lifecycle", "${lifecycle.currentState}")
+            Log.i("lifecycle", "${viewLifecycleOwner.lifecycle.currentState}")
+        }
 
-            }
-        }
         binding!!.col2.setOnClickListener {
-            Log.d("onTurn", onTurn)
-            Log.d("isColumn2Empty", "${isColumnsEmpty[1]}")
-            it as AppCompatImageView
-            if (isColumnsEmpty[1]) {
-                if (onTurn == GameSetting.PLAYER_1) {
-                    columnsFilledBy[1] = GameSetting.PLAYER_1
-                    Log.d("column2FilledBy", columnsFilledBy[1])
-                    onTurn = GameSetting.PLAYER_2
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player1CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                } else {
-                    columnsFilledBy[1] = GameSetting.PLAYER_2
-                    Log.d("column2FilledBy", columnsFilledBy[1])
-                    onTurn = GameSetting.PLAYER_1
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player2CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                }
-                isColumnsEmpty[1] = false
-                Log.d("isColumn2Empty", "${isColumnsEmpty[1]}")
-                if (isGameOver()) {
-                    Log.d("isGameOver", "${isGameOver()}")
-                    makeGameplayNotClickable()
-                    saveState()
-                    updatePlayersProfile()
-                    prompt()
-                }
+            it as Column
+            if (it.isEmpty) {
+                fillTheColumn(it)
+                it.isEmpty = false
             }
+            if (isGameOver()) {
+                Log.d("isGameOver", "${isGameOver()}")
+                makeGameplayNotClickable()
+                saveState()
+                updatePlayersProfile()
+                prompt()
+            }
+            Log.i("lifecycle", "${lifecycle.currentState}")
         }
+
         binding!!.col3.setOnClickListener {
-            Log.d("onTurn", onTurn)
-            Log.d("isColumn3Empty", "${isColumnsEmpty[2]}")
-            it as AppCompatImageView
-            if (isColumnsEmpty[2]) {
-                if (onTurn == GameSetting.PLAYER_1) {
-                    columnsFilledBy[2] = GameSetting.PLAYER_1
-                    Log.d("column3FilledBy", columnsFilledBy[2])
-                    onTurn = GameSetting.PLAYER_2
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player1CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                } else {
-                    columnsFilledBy[2] = GameSetting.PLAYER_2
-                    Log.d("column3FilledBy", columnsFilledBy[2])
-                    onTurn = GameSetting.PLAYER_1
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player2CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                }
-                isColumnsEmpty[2] = false
-                Log.d("isColumn3Empty", "${isColumnsEmpty[2]}")
-                if (isGameOver()) {
-                    Log.d("isGameOver", "${isGameOver()}")
-                    makeGameplayNotClickable()
-                    saveState()
-                    updatePlayersProfile()
-                    prompt()
-                }
+            it as Column
+            if (it.isEmpty) {
+                fillTheColumn(it)
+                it.isEmpty = false
             }
+            if (isGameOver()) {
+                Log.d("isGameOver", "${isGameOver()}")
+                makeGameplayNotClickable()
+                saveState()
+                updatePlayersProfile()
+                prompt()
+            }
+
         }
         binding!!.col4.setOnClickListener {
-            Log.d("onTurn", onTurn)
-            Log.d("isColumn4Empty", "${isColumnsEmpty[3]}")
-            it as AppCompatImageView
-            if (isColumnsEmpty[3]) {
-                if (onTurn == GameSetting.PLAYER_1) {
-                    columnsFilledBy[3] = GameSetting.PLAYER_1
-                    Log.d("column4FilledBy", columnsFilledBy[3])
-                    onTurn = GameSetting.PLAYER_2
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player1CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                } else {
-                    columnsFilledBy[3] = GameSetting.PLAYER_2
-                    Log.d("column4FilledBy", columnsFilledBy[3])
-                    onTurn = GameSetting.PLAYER_1
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player2CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                }
-                isColumnsEmpty[3] = false
-                Log.d("isColumn4Empty", "${isColumnsEmpty[3]}")
-                if (isGameOver()) {
-                    Log.d("isGameOver", "${isGameOver()}")
-                    makeGameplayNotClickable()
-                    saveState()
-                    updatePlayersProfile()
-                    prompt()
-                }
+            it as Column
+            if (it.isEmpty) {
+                fillTheColumn(it)
+                it.isEmpty = false
+            }
+            if (isGameOver()) {
+                Log.d("isGameOver", "${isGameOver()}")
+                makeGameplayNotClickable()
+                saveState()
+                updatePlayersProfile()
+                prompt()
             }
         }
         binding!!.col5.setOnClickListener {
-            Log.d("onTurn", onTurn)
-            Log.d("isColumn5Empty", "${isColumnsEmpty[4]}")
-            it as AppCompatImageView
-            if (isColumnsEmpty[4]) {
-                if (onTurn == GameSetting.PLAYER_1) {
-                    columnsFilledBy[4] = GameSetting.PLAYER_1
-                    Log.d("column5FilledBy", columnsFilledBy[4])
-                    onTurn = GameSetting.PLAYER_2
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player1CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                } else {
-                    columnsFilledBy[4] = GameSetting.PLAYER_2
-                    Log.d("column5FilledBy", columnsFilledBy[4])
-                    onTurn = GameSetting.PLAYER_1
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player2CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                }
-                isColumnsEmpty[4] = false
-                Log.d("isColumn5Empty", "${isColumnsEmpty[4]}")
-                if (isGameOver()) {
-                    Log.d("isGameOver", "${isGameOver()}")
-                    makeGameplayNotClickable()
-                    saveState()
-                    updatePlayersProfile()
-                    prompt()
-                }
+            it as Column
+            if (it.isEmpty) {
+                fillTheColumn(it)
+                it.isEmpty = false
             }
+            if (isGameOver()) {
+                Log.d("isGameOver", "${isGameOver()}")
+                makeGameplayNotClickable()
+                saveState()
+                updatePlayersProfile()
+                prompt()
+            }
+
         }
         binding!!.col6.setOnClickListener {
-            Log.d("onTurn", onTurn)
-            Log.d("isColumn6Empty", "${isColumnsEmpty[5]}")
-            it as AppCompatImageView
-            if (isColumnsEmpty[5]) {
-                if (onTurn == GameSetting.PLAYER_1) {
-                    columnsFilledBy[5] = GameSetting.PLAYER_1
-                    Log.d("column6FilledBy", columnsFilledBy[5])
-                    onTurn = GameSetting.PLAYER_2
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player1CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-
-                } else {
-                    columnsFilledBy[5] = GameSetting.PLAYER_2
-                    Log.d("column6FilledBy", columnsFilledBy[5])
-                    onTurn = GameSetting.PLAYER_1
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player2CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                }
-                isColumnsEmpty[5] = false
-                Log.d("isColumn6Empty", "${isColumnsEmpty[5]}")
-                if (isGameOver()) {
-                    Log.d("isGameOver", "${isGameOver()}")
-                    makeGameplayNotClickable()
-                    saveState()
-                    updatePlayersProfile()
-                    prompt()
-                }
+            it as Column
+            if (it.isEmpty) {
+                fillTheColumn(it)
+                it.isEmpty = false
             }
+            if (isGameOver()) {
+                Log.d("isGameOver", "${isGameOver()}")
+                makeGameplayNotClickable()
+                saveState()
+                updatePlayersProfile()
+                prompt()
+            }
+
         }
         binding!!.col7.setOnClickListener {
-            Log.d("onTurn", onTurn)
-            Log.d("isColumn7Empty", "${isColumnsEmpty[6]}")
-            it as AppCompatImageView
-            if (isColumnsEmpty[6]) {
-                if (onTurn == GameSetting.PLAYER_1) {
-                    columnsFilledBy[6] = GameSetting.PLAYER_1
-                    Log.d("column7FilledBy", columnsFilledBy[6])
-                    onTurn = GameSetting.PLAYER_2
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player1CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                } else {
-                    columnsFilledBy[6] = GameSetting.PLAYER_2
-                    Log.d("column7FilledBy", columnsFilledBy[6])
-                    onTurn = GameSetting.PLAYER_1
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player2CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                }
-                isColumnsEmpty[6] = false
-                Log.d("isColumn7Empty", "${isColumnsEmpty[6]}")
-                if (isGameOver()) {
-                    Log.d("isGameOver", "${isGameOver()}")
-                    makeGameplayNotClickable()
-                    saveState()
-                    updatePlayersProfile()
-                    prompt()
-                }
+            it as Column
+            if (it.isEmpty) {
+                fillTheColumn(it)
+                it.isEmpty = false
             }
+            if (isGameOver()) {
+                Log.d("isGameOver", "${isGameOver()}")
+                makeGameplayNotClickable()
+                saveState()
+                updatePlayersProfile()
+                prompt()
+            }
+
         }
         binding!!.col8.setOnClickListener {
-            Log.d("onTurn", onTurn)
-            Log.d("isColumn8Empty", "${isColumnsEmpty[7]}")
-            it as AppCompatImageView
-            if (isColumnsEmpty[7]) {
-                if (onTurn == GameSetting.PLAYER_1) {
-                    columnsFilledBy[7] = GameSetting.PLAYER_1
-                    Log.d("column8FilledBy", columnsFilledBy[7])
-                    onTurn = GameSetting.PLAYER_2
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player1CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                } else {
-                    columnsFilledBy[7] = GameSetting.PLAYER_2
-                    Log.d("column8FilledBy", columnsFilledBy[7])
-                    onTurn = GameSetting.PLAYER_1
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player2CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                }
-                isColumnsEmpty[7] = false
-                Log.d("isColumn8Empty", "${isColumnsEmpty[7]}")
-                if (isGameOver()) {
-                    Log.d("isGameOver", "${isGameOver()}")
-                    makeGameplayNotClickable()
-                    saveState()
-                    updatePlayersProfile()
-                    prompt()
-                }
+            it as Column
+            if (it.isEmpty) {
+                fillTheColumn(it)
+                it.isEmpty = false
             }
+            if (isGameOver()) {
+                Log.d("isGameOver", "${isGameOver()}")
+                makeGameplayNotClickable()
+                saveState()
+                updatePlayersProfile()
+                prompt()
+            }
+
         }
         binding!!.col9.setOnClickListener {
-            Log.d("onTurn", onTurn)
-            Log.d("isColumn9Empty", "${isColumnsEmpty[8]}")
-            it as AppCompatImageView
-            if (isColumnsEmpty[8]) {
-                if (onTurn == GameSetting.PLAYER_1) {
-                    columnsFilledBy[8] = GameSetting.PLAYER_1
-                    Log.d("column9FilledBy", columnsFilledBy[8])
-                    onTurn = GameSetting.PLAYER_2
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player1CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                } else {
-                    columnsFilledBy[8] = GameSetting.PLAYER_2
-                    Log.d("column9FilledBy", columnsFilledBy[8])
-                    onTurn = GameSetting.PLAYER_1
-                    Log.d("onTurn", onTurn)
-                    if (GameSetting.player2CharGame == GameSetting.CIRCLE_CHAR) {
-                        it.setImageResource(R.drawable.lingkaran)
-                    }
-                    if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
-                        it.setImageResource(R.drawable.silang)
-                    }
-                }
-                isColumnsEmpty[8] = false
-                Log.d("isColumn9Empty", "${isColumnsEmpty[8]}")
-                if (isGameOver()) {
-                    Log.d("isGameOver", "${isGameOver()}")
-                    makeGameplayNotClickable()
-                    saveState()
-                    updatePlayersProfile()
-                    prompt()
-                }
+            it as Column
+            if (it.isEmpty) {
+                fillTheColumn(it)
+                it.isEmpty = false
             }
+            if (isGameOver()) {
+                Log.d("isGameOver", "${isGameOver()}")
+                makeGameplayNotClickable()
+                saveState()
+                updatePlayersProfile()
+                prompt()
+            }
+
         }
 
         binding!!.newGameButton.setOnClickListener {
@@ -417,80 +209,45 @@ class GameplayFragment : Fragment() {
         }
     }
 
+    private fun fillTheColumn(column: Column) {
+        if (whoFillTheColumn() == PLAYER_1) {
+            colFilledByP1(column)
+            onTurn = PLAYER_2
+        } else {
+            colFilledByP2(column)
+            onTurn = PLAYER_1
+        }
+    }
+
+    private fun whoFillTheColumn(): String {
+        return if (onTurn == PLAYER_1) PLAYER_1
+        else PLAYER_2
+    }
+
+    private fun colFilledByP1(column: Column) {
+        column.filledBy = PLAYER_1
+        if (player1CharGame == CROSS_CHAR) {
+            column.setImageResource(R.drawable.silang)
+        }
+        if (player1CharGame == CIRCLE_CHAR) {
+            column.setImageResource(R.drawable.lingkaran)
+        }
+    }
+
+    private fun colFilledByP2(column: Column) {
+        column.filledBy = PLAYER_2
+        if (player2CharGame == CROSS_CHAR) {
+            column.setImageResource(R.drawable.silang)
+        }
+        if (player2CharGame == CIRCLE_CHAR) {
+            column.setImageResource(R.drawable.lingkaran)
+        }
+    }
+
     private fun isGameOver(): Boolean {
-        if (columnsFilledBy[0] == GameSetting.PLAYER_1 && columnsFilledBy[1] == GameSetting.PLAYER_1 && columnsFilledBy[2] == GameSetting.PLAYER_1 ) {
-            theWinner = GameSetting.PLAYER_1
-            return true
-        }
-        if (columnsFilledBy[3] == GameSetting.PLAYER_1 && columnsFilledBy[4] == GameSetting.PLAYER_1 && columnsFilledBy[5] == GameSetting.PLAYER_1 ) {
-            theWinner = GameSetting.PLAYER_1
-            return true
-        }
-        if (columnsFilledBy[6] == GameSetting.PLAYER_1 && columnsFilledBy[7] == GameSetting.PLAYER_1 && columnsFilledBy[8] == GameSetting.PLAYER_1 ) {
-            theWinner = GameSetting.PLAYER_1
-            return true
-        }
-
-        if (columnsFilledBy[0] == GameSetting.PLAYER_1 && columnsFilledBy[3] == GameSetting.PLAYER_1 && columnsFilledBy[6] == GameSetting.PLAYER_1 ) {
-            theWinner = GameSetting.PLAYER_1
-            return true
-        }
-        if (columnsFilledBy[1] == GameSetting.PLAYER_1 && columnsFilledBy[4] == GameSetting.PLAYER_1 && columnsFilledBy[7] == GameSetting.PLAYER_1 ) {
-            theWinner = GameSetting.PLAYER_1
-            return true
-        }
-        if (columnsFilledBy[2] == GameSetting.PLAYER_1 && columnsFilledBy[5] == GameSetting.PLAYER_1 && columnsFilledBy[8] == GameSetting.PLAYER_1 ) {
-            theWinner = GameSetting.PLAYER_1
-            return true
-        }
-
-        if (columnsFilledBy[0] == GameSetting.PLAYER_1 && columnsFilledBy[4] == GameSetting.PLAYER_1 && columnsFilledBy[8] == GameSetting.PLAYER_1 ) {
-            theWinner = GameSetting.PLAYER_1
-            return true
-        }
-        if (columnsFilledBy[2] == GameSetting.PLAYER_1 && columnsFilledBy[4] == GameSetting.PLAYER_1 && columnsFilledBy[6] == GameSetting.PLAYER_1 ) {
-            theWinner = GameSetting.PLAYER_1
-            return true
-        }
-        /*--------------------------------------------------------------------------------------------------------------------------------*/
-
-        if (columnsFilledBy[0] == GameSetting.PLAYER_2 && columnsFilledBy[1] == GameSetting.PLAYER_2 && columnsFilledBy[2] == GameSetting.PLAYER_2 ) {
-            theWinner = GameSetting.PLAYER_2
-            return true
-        }
-        if (columnsFilledBy[3] == GameSetting.PLAYER_2 && columnsFilledBy[4] == GameSetting.PLAYER_2 && columnsFilledBy[5] == GameSetting.PLAYER_2 ) {
-            theWinner = GameSetting.PLAYER_2
-            return true
-        }
-        if (columnsFilledBy[6] == GameSetting.PLAYER_2 && columnsFilledBy[7] == GameSetting.PLAYER_2 && columnsFilledBy[8] == GameSetting.PLAYER_2 ) {
-            theWinner = GameSetting.PLAYER_2
-            return true
-        }
-
-        if (columnsFilledBy[0] == GameSetting.PLAYER_2 && columnsFilledBy[3] == GameSetting.PLAYER_2 && columnsFilledBy[6] == GameSetting.PLAYER_2 ) {
-            theWinner = GameSetting.PLAYER_2
-            return true
-        }
-        if (columnsFilledBy[1] == GameSetting.PLAYER_2 && columnsFilledBy[4] == GameSetting.PLAYER_2 && columnsFilledBy[7] == GameSetting.PLAYER_2 ) {
-            theWinner = GameSetting.PLAYER_2
-            return true
-        }
-        if (columnsFilledBy[2] == GameSetting.PLAYER_2 && columnsFilledBy[5] == GameSetting.PLAYER_2 && columnsFilledBy[8] == GameSetting.PLAYER_2 ) {
-            theWinner = GameSetting.PLAYER_2
-            return true
-        }
-
-        if (columnsFilledBy[0] == GameSetting.PLAYER_2 && columnsFilledBy[4] == GameSetting.PLAYER_2 && columnsFilledBy[8] == GameSetting.PLAYER_2 ) {
-            theWinner = GameSetting.PLAYER_2
-            return true
-        }
-        if (columnsFilledBy[2] == GameSetting.PLAYER_2 && columnsFilledBy[4] == GameSetting.PLAYER_2 && columnsFilledBy[6] == GameSetting.PLAYER_2 ) {
-            theWinner = GameSetting.PLAYER_2
-            return true
-        }
-        /*--------------------------------------------------------------------------------------------------------------------------------*/
-
-        return isColumnsEmpty.all { it == false }
+        return if (isThereAWinner()) true
+        else if (isDraw()) true
+        else false
     }
 
     private fun prompt() {
@@ -499,7 +256,7 @@ class GameplayFragment : Fragment() {
             setContentView(R.layout.dialog_game_over)
             window!!.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL)
             val gameOverText = findViewById<AppCompatTextView>(R.id.game_over_text)
-            if (isThereAWinner()) {
+            if (theWinner != "") {
                 gameOverText.text = "${whoIsTheWinner()} win!!"
             } else {
                 gameOverText.text = "Draw!!"
@@ -539,46 +296,133 @@ class GameplayFragment : Fragment() {
 
     private fun updatePlayersCharImage() {
 
-        if (GameSetting.player1CharGame == GameSetting.CIRCLE_CHAR) {
+        if (player1CharGame == CIRCLE_CHAR) {
             binding!!.player1CharImage.setImageResource(R.drawable.lingkaran)
         }
-        if (GameSetting.player1CharGame == GameSetting.CROSS_CHAR) {
+        if (player1CharGame == CROSS_CHAR) {
             binding!!.player1CharImage.setImageResource(R.drawable.silang)
         }
 
-        if (GameSetting.player2CharGame == GameSetting.CIRCLE_CHAR) {
+        if (player2CharGame == CIRCLE_CHAR) {
             binding!!.player2CharImage.setImageResource(R.drawable.lingkaran)
         }
-        if (GameSetting.player2CharGame == GameSetting.CROSS_CHAR) {
+        if (player2CharGame == CROSS_CHAR) {
             binding!!.player2CharImage.setImageResource(R.drawable.silang)
         }
 
     }
 
     private fun isThereAWinner(): Boolean {
-        return theWinner != ""
+        if (binding!!.col1.filledBy == PLAYER_1 && binding!!.col2.filledBy == PLAYER_1 && binding!!.col3.filledBy == PLAYER_1) {
+            theWinner = PLAYER_1
+            return true
+        }
+        if (binding!!.col4.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col6.filledBy == PLAYER_1) {
+            theWinner = PLAYER_1
+            return true
+        }
+        if (binding!!.col7.filledBy == PLAYER_1 && binding!!.col8.filledBy == PLAYER_1 && binding!!.col9.filledBy == PLAYER_1) {
+            theWinner = PLAYER_1
+            return true
+        }
+        if (binding!!.col1.filledBy == PLAYER_1 && binding!!.col4.filledBy == PLAYER_1 && binding!!.col7.filledBy == PLAYER_1) {
+            theWinner = PLAYER_1
+            return true
+        }
+        if (binding!!.col2.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col8.filledBy == PLAYER_1) {
+            theWinner = PLAYER_1
+            return true
+        }
+        if (binding!!.col3.filledBy == PLAYER_1 && binding!!.col6.filledBy == PLAYER_1 && binding!!.col9.filledBy == PLAYER_1) {
+            theWinner = PLAYER_1
+            return true
+        }
+        if (binding!!.col1.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col9.filledBy == PLAYER_1) {
+            theWinner = PLAYER_1
+            return true
+        }
+        if (binding!!.col3.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col7.filledBy == PLAYER_1) {
+            theWinner = PLAYER_1
+            return true
+        }
+
+        /*--------------------------------------------------------------------------------------------------*/
+
+        if (binding!!.col1.filledBy == PLAYER_2 && binding!!.col2.filledBy == PLAYER_2 && binding!!.col3.filledBy == PLAYER_2) {
+            theWinner = PLAYER_2
+            return true
+        }
+        if (binding!!.col4.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col6.filledBy == PLAYER_2) {
+            theWinner = PLAYER_2
+            return true
+        }
+        if (binding!!.col7.filledBy == PLAYER_2 && binding!!.col8.filledBy == PLAYER_2 && binding!!.col9.filledBy == PLAYER_2) {
+            theWinner = PLAYER_2
+            return true
+        }
+        if (binding!!.col1.filledBy == PLAYER_2 && binding!!.col4.filledBy == PLAYER_2 && binding!!.col7.filledBy == PLAYER_2) {
+            theWinner = PLAYER_2
+            return true
+        }
+        if (binding!!.col2.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col8.filledBy == PLAYER_2) {
+            theWinner = PLAYER_2
+            return true
+        }
+        if (binding!!.col3.filledBy == PLAYER_2 && binding!!.col6.filledBy == PLAYER_2 && binding!!.col9.filledBy == PLAYER_2) {
+            theWinner = PLAYER_2
+            return true
+        }
+        if (binding!!.col1.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col9.filledBy == PLAYER_2) {
+            theWinner = PLAYER_2
+            return true
+        }
+        if (binding!!.col3.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col7.filledBy == PLAYER_2) {
+            theWinner = PLAYER_2
+            return true
+        }
+
+        return false
+    }
+
+    private fun isDraw(): Boolean {
+        var count = 0
+        if (!binding!!.col1.isEmpty) count++
+        if (!binding!!.col2.isEmpty) count++
+        if (!binding!!.col3.isEmpty) count++
+        if (!binding!!.col4.isEmpty) count++
+        if (!binding!!.col5.isEmpty) count++
+        if (!binding!!.col6.isEmpty) count++
+        if (!binding!!.col7.isEmpty) count++
+        if (!binding!!.col8.isEmpty) count++
+        if (!binding!!.col9.isEmpty) count++
+
+        return count == 9
     }
 
     private fun whoIsTheWinner(): String {
-        return if (theWinner == GameSetting.PLAYER_1)
-            GameSetting.PLAYER_1 else GameSetting.PLAYER_2
+        return if (theWinner == PLAYER_1)
+            PLAYER_1 else PLAYER_2
     }
 
     private fun saveState() {
-        if (theWinner == GameSetting.PLAYER_1) {
+        if (theWinner == PLAYER_1) {
             p1NumOfWins = (p1NumOfWins.toInt() + 1).toString()
-            requireContext().openFileOutput(p1WinsFileName, Context.MODE_PRIVATE).write(p1NumOfWins.toByteArray())
+            requireContext().openFileOutput(p1WinsFileName, Context.MODE_PRIVATE)
+                .write(p1NumOfWins.toByteArray())
 
             p2NumOfLoses = (p2NumOfLoses.toInt() + 1).toString()
-            requireContext().openFileOutput(p2LosesFileName, Context.MODE_PRIVATE).write(p2NumOfLoses.toByteArray())
+            requireContext().openFileOutput(p2LosesFileName, Context.MODE_PRIVATE)
+                .write(p2NumOfLoses.toByteArray())
         }
 
-        if (theWinner == GameSetting.PLAYER_2) {
+        if (theWinner == PLAYER_2) {
             p2NumOfWins = (p2NumOfWins.toInt() + 1).toString()
-            requireContext().openFileOutput(p2WinsFileName, Context.MODE_PRIVATE).write(p2NumOfWins.toByteArray())
+            requireContext().openFileOutput(p2WinsFileName, Context.MODE_PRIVATE)
+                .write(p2NumOfWins.toByteArray())
 
             p1NumOfLoses = (p1NumOfLoses.toInt() + 1).toString()
-            requireContext().openFileOutput(p1LosesFileName, Context.MODE_PRIVATE).write(p1NumOfLoses.toByteArray())
+            requireContext().openFileOutput(p1LosesFileName, Context.MODE_PRIVATE)
+                .write(p1NumOfLoses.toByteArray())
         }
     }
 
@@ -588,43 +432,40 @@ class GameplayFragment : Fragment() {
         p2NumOfWins = requireContext().openFileInput(p2WinsFileName).reader().readText()
         p2NumOfLoses = requireContext().openFileInput(p2LosesFileName).reader().readText()
 
-        repeat(9) {
-            isColumnsEmpty.add(true)
-            columnsFilledBy.add("")
+
+        if (firstPlay.value == PLAYER_1) {
+            onTurn = PLAYER_1
         }
-        if (GameSetting.firstPlay.value == GameSetting.PLAYER_1) {
-            onTurn = GameSetting.PLAYER_1
-        }
-        if (GameSetting.firstPlay.value == GameSetting.PLAYER_2) {
-            onTurn = GameSetting.PLAYER_2
+        if (firstPlay.value == PLAYER_2) {
+            onTurn = PLAYER_2
         }
     }
-    
+
     private fun createFiles() {
-        if ( File(requireContext().filesDir, p1WinsFileName).createNewFile() ) {
+        if (File(requireContext().filesDir, p1WinsFileName).createNewFile()) {
             requireContext().openFileOutput(p1WinsFileName, Context.MODE_PRIVATE)
                 .write("0".toByteArray())
         }
-        if ( File(requireContext().filesDir, p1LosesFileName).createNewFile() ) {
+        if (File(requireContext().filesDir, p1LosesFileName).createNewFile()) {
             requireContext().openFileOutput(p1LosesFileName, Context.MODE_PRIVATE)
                 .write("0".toByteArray())
         }
-        if ( File(requireContext().filesDir, p2WinsFileName).createNewFile() ) {
+        if (File(requireContext().filesDir, p2WinsFileName).createNewFile()) {
             requireContext().openFileOutput(p2WinsFileName, Context.MODE_PRIVATE)
                 .write("0".toByteArray())
         }
-        if ( File(requireContext().filesDir, p2LosesFileName).createNewFile() ) {
+        if (File(requireContext().filesDir, p2LosesFileName).createNewFile()) {
             requireContext().openFileOutput(p2LosesFileName, Context.MODE_PRIVATE)
                 .write("0".toByteArray())
         }
     }
-    
+
     override fun onDestroy() {
         super.onDestroy()
         Log.d("GameplayFragment", "destroyed")
-        GameSetting.player1CharGame = ""
-        GameSetting.player2CharGame = ""
-        GameSetting.firstPlay.value = ""
+        player1CharGame = ""
+        player2CharGame = ""
+        firstPlay.value = ""
     }
 
 }
