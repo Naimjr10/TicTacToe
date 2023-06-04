@@ -166,21 +166,21 @@
             android:layout_height="80dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="40dp"
+            android:contentDescription="col_1"
             app:layout_constraintBottom_toTopOf="@+id/col_4"
             app:layout_constraintEnd_toStartOf="@+id/col_2"
-            tools:src="@drawable/lingkaran"
-            />
+            tools:src="@drawable/lingkaran" />
 
         <com.nandro.tictactoe.Column
             android:id="@+id/col_2"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginBottom="40dp"
+            android:contentDescription="col_2"
             app:layout_constraintBottom_toTopOf="@+id/col_5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:src="@drawable/silang"
-            />
+            tools:src="@drawable/silang" />
 
         <com.nandro.tictactoe.Column
             android:id="@+id/col_3"
@@ -188,6 +188,7 @@
             android:layout_height="80dp"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="40dp"
+            android:contentDescription="col_3"
             app:layout_constraintBottom_toTopOf="@+id/col_6"
             app:layout_constraintStart_toEndOf="@+id/col_2"
             tools:src="@drawable/lingkaran" />
@@ -197,6 +198,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginEnd="40dp"
+            android:contentDescription="col_4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/col_5"
             app:layout_constraintTop_toTopOf="parent"
@@ -206,6 +208,7 @@
             android:id="@+id/col_5"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:contentDescription="col_5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -217,6 +220,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginStart="40dp"
+            android:contentDescription="col_6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/col_5"
             app:layout_constraintTop_toTopOf="parent"
@@ -228,6 +232,7 @@
             android:layout_height="80dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="40dp"
+            android:contentDescription="col_7"
             app:layout_constraintEnd_toStartOf="@+id/col_8"
             app:layout_constraintTop_toBottomOf="@+id/col_4"
             tools:src="@drawable/lingkaran" />
@@ -237,6 +242,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="40dp"
+            android:contentDescription="col_8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/col_5"
@@ -248,10 +254,10 @@
             android:layout_height="80dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
+            android:contentDescription="col_9"
             app:layout_constraintStart_toEndOf="@+id/col_8"
             app:layout_constraintTop_toBottomOf="@+id/col_6"
-            tools:src="@drawable/lingkaran"
-            />
+            tools:src="@drawable/lingkaran" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

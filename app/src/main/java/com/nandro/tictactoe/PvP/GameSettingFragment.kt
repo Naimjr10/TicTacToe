@@ -27,13 +27,13 @@ class GameSettingFragment : Fragment() {
 
     var binding: FragmentPvpGameSettingBinding? = null
 
-    lateinit var viewModel: GameSettingViewModel
+    //lateinit var viewModel: GameSettingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("GameSettingFragment", "created")
         //val viewModelFactory = ViewModelProvider.NewInstanceFactory()
-        viewModel = ViewModelProvider(requireActivity() as AppCompatActivity).get(GameSettingViewModel::class.java)
+        //viewModel = ViewModelProvider(requireActivity() as AppCompatActivity).get(GameSettingViewModel::class.java)
         Log.d("parentFragment","$parentFragment")
     }
 
@@ -124,10 +124,15 @@ class GameSettingFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         Log.d("GameSettingFragment", "destroyed")
-
+        firstPlay.removeObservers(requireActivity())
     }
 
 }
