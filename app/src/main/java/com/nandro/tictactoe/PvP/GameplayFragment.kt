@@ -1,8 +1,7 @@
-package com.nandro.tictactoe.PvP
+package com.nandro.tictactoe.pvp
 
 import android.app.Dialog
 import android.content.Context
-import android.net.http.SslCertificate.saveState
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,32 +9,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.navigation.fragment.findNavController
-import com.nandro.tictactoe.Column
+import com.nandro.tictactoe.customview.Column
 import com.nandro.tictactoe.R
 import com.nandro.tictactoe.databinding.FragmentPvpGameplayBinding
-import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.PLAYER_2
-import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.PLAYER_1
-import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.player1CharGame
-import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.player2CharGame
-import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.CIRCLE_CHAR
-import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.CROSS_CHAR
-import com.nandro.tictactoe.PvP.GameSettingFragment.GameSetting.firstPlay
+import com.nandro.tictactoe.pvp.GameSettingFragment.GameSetting.player1CharGame
+import com.nandro.tictactoe.pvp.GameSettingFragment.GameSetting.player2CharGame
+import com.nandro.tictactoe.pvp.GameSettingFragment.GameSetting.firstPlay
+import com.nandro.tictactoe.tag.GameplayFragment_TAG
 import java.io.File
 
 class GameplayFragment : Fragment() {
     private var binding: FragmentPvpGameplayBinding? = null
     private lateinit var onTurn: String
     private var theWinner = ""
-
-    private val p1WinsFileName = "P1_num_of_wins"
-    private val p1LosesFileName = "P1_num_of_loses"
-    private val p2WinsFileName = "P2_num_of_wins"
-    private val p2LosesFileName = "P2_num_of_loses"
 
     private lateinit var p1NumOfWins: String
     private lateinit var p1NumOfLoses: String
@@ -53,10 +43,20 @@ class GameplayFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("GameplayFragment_lifecycle", "${lifecycle.currentState}")
+        Log.i(GameplayFragment_TAG, "onCreate()")
 
         createFiles() // Create files if the files don't exist
         readFiles() // Read the files
+
+        // Implement custom BACK Navigation
+        val callBack = object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.i(GameplayFragment_TAG, "handleOnBackPressed()")
+                // Do nothing
+            }
+        }
+        // Apply the custom BACK Navigation only to this activity ( GameplayFragment )
+        requireActivity().onBackPressedDispatcher.addCallback(this, callBack)
 
     }
 
@@ -64,8 +64,10 @@ class GameplayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.i(GameplayFragment_TAG, "onCreateView()")
+
         binding = FragmentPvpGameplayBinding.inflate(inflater, container, false)
-        Log.i("GameplayFragment_lifecycle", "${lifecycle.currentState}")
+        Log.i(GameplayFragment_TAG, "binding = $binding")
 
         updatePlayersProfile()
         updatePlayersCharImage()
@@ -75,9 +77,13 @@ class GameplayFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.i("GameplayFragment_lifecycle", "${lifecycle.currentState}")
+        Log.i(GameplayFragment_TAG, "onCreate()")
+
         binding!!.col1.setOnClickListener {
+            Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
             it as Column
+            // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
                 it.isEmpty = false
@@ -85,7 +91,10 @@ class GameplayFragment : Fragment() {
             onResume()
         }
         binding!!.col2.setOnClickListener {
+            Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
             it as Column
+            // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
                 it.isEmpty = false
@@ -93,7 +102,10 @@ class GameplayFragment : Fragment() {
             onResume()
         }
         binding!!.col3.setOnClickListener {
+            Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
             it as Column
+            // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
                 it.isEmpty = false
@@ -101,7 +113,10 @@ class GameplayFragment : Fragment() {
             onResume()
         }
         binding!!.col4.setOnClickListener {
+            Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
             it as Column
+            // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
                 it.isEmpty = false
@@ -109,7 +124,10 @@ class GameplayFragment : Fragment() {
             onResume()
         }
         binding!!.col5.setOnClickListener {
+            Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
             it as Column
+            // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
                 it.isEmpty = false
@@ -117,7 +135,10 @@ class GameplayFragment : Fragment() {
             onResume()
         }
         binding!!.col6.setOnClickListener {
+            Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
             it as Column
+            // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
                 it.isEmpty = false
@@ -125,7 +146,10 @@ class GameplayFragment : Fragment() {
             onResume()
         }
         binding!!.col7.setOnClickListener {
+            Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
             it as Column
+            // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
                 it.isEmpty = false
@@ -133,7 +157,10 @@ class GameplayFragment : Fragment() {
             onResume()
         }
         binding!!.col8.setOnClickListener {
+            Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
             it as Column
+            // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
                 it.isEmpty = false
@@ -141,7 +168,10 @@ class GameplayFragment : Fragment() {
             onResume()
         }
         binding!!.col9.setOnClickListener {
+            Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
             it as Column
+            // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
                 it.isEmpty = false
@@ -149,17 +179,20 @@ class GameplayFragment : Fragment() {
             onResume()
         }
 
-        binding!!.newGameButton.setOnClickListener {
-            findNavController().navigate(R.id.action_gameplayFragment_to_gameSettingFragment)
+        binding!!.backToMainMenuButton.setOnClickListener {
+            Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
+            // Navigate to MainMenuFragment
+            findNavController().navigate(R.id.action_gameplayFragment_to_mainMenuFragment)
         }
     }
 
-    // Check if the game is over
     override fun onResume() {
-        Log.i("GameplayFragment_lifecycle", "${lifecycle.currentState}")
         super.onResume()
+        Log.i(GameplayFragment_TAG, "onResume()")
+
+        // Check whether the game is over
         if (isGameOver()) {
-            Log.d("isGameOver", "${isGameOver()}")
             prompt()
             makeGameplayNotClickable()
             updatePlayersProfile()
@@ -168,26 +201,26 @@ class GameplayFragment : Fragment() {
     }
 
     private fun fillTheColumn(column: Column) {
-        if (whoFillTheColumn() == PLAYER_1) {
+        Log.i(GameplayFragment_TAG, "fillTheColumn()")
+
+        // Check who fill the column
+        if (onTurn == PLAYER_1) {
             colFilledByP1(column)
             onTurn = PLAYER_2
-            Log.i("onTurn", onTurn)
+            Log.i(GameplayFragment_TAG, "onTurn = $onTurn")
         } else {
             colFilledByP2(column)
             onTurn = PLAYER_1
-            Log.i("onTurn", onTurn)
+            Log.i(GameplayFragment_TAG, "onTurn = $onTurn")
         }
     }
 
-    private fun whoFillTheColumn(): String {
-        Log.i("onTurn", onTurn)
-        return if (onTurn == PLAYER_1) PLAYER_1
-        else PLAYER_2
-    }
-
     private fun colFilledByP1(column: Column) {
+        Log.i(GameplayFragment_TAG, "colFilledByP1()")
+
         column.filledBy = PLAYER_1
-        Log.i("${column.contentDescription}", "filled By ${column.filledBy}")
+        Log.i(GameplayFragment_TAG, "${column.contentDescription} filledBy = ${column.filledBy}")
+
         if (player1CharGame == CROSS_CHAR) {
             column.setImageResource(R.drawable.silang)
         }
@@ -197,8 +230,10 @@ class GameplayFragment : Fragment() {
     }
 
     private fun colFilledByP2(column: Column) {
+        Log.i(GameplayFragment_TAG, "colFilledByP2()")
+
         column.filledBy = PLAYER_2
-        Log.i("${column.contentDescription}", "filled By ${column.filledBy}")
+        Log.i(GameplayFragment_TAG, "${column.contentDescription} filledBy = ${column.filledBy}")
         if (player2CharGame == CROSS_CHAR) {
             column.setImageResource(R.drawable.silang)
         }
@@ -208,12 +243,16 @@ class GameplayFragment : Fragment() {
     }
 
     private fun isGameOver(): Boolean {
+        Log.i(GameplayFragment_TAG, "isGameOver()")
+
         return if (isThereAWinner()) true
         else if (isDraw()) true
         else false
     }
 
     private fun prompt() {
+        Log.i(GameplayFragment_TAG, "prompt()")
+
         val dialog = Dialog(requireContext())
         dialog.apply {
             setContentView(R.layout.dialog_game_over)
@@ -225,19 +264,25 @@ class GameplayFragment : Fragment() {
                 gameOverText.text = "Draw!!"
             }
             findViewById<AppCompatButton>(R.id.main_menu_button).setOnClickListener {
+                Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
                 findNavController().navigate(R.id.action_gameplayFragment_to_mainMenuFragment)
                 dismiss()
             }
-            findViewById<AppCompatButton>(R.id.new_game_button).setOnClickListener {
+            findViewById<AppCompatButton>(R.id.play_again_button).setOnClickListener {
+                Log.i(GameplayFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
+
                 findNavController().navigate(R.id.action_gameplayFragment_to_gameSettingFragment)
                 dismiss()
             }
             show()
-            findNavController().enableOnBackPressed(false)
+            setCancelable(false)
         }
     }
 
     private fun makeGameplayNotClickable() {
+        Log.i(GameplayFragment_TAG, "makeGameplayNotClickable()")
+
         binding!!.col1.isClickable = false
         binding!!.col2.isClickable = false
         binding!!.col3.isClickable = false
@@ -247,19 +292,21 @@ class GameplayFragment : Fragment() {
         binding!!.col7.isClickable = false
         binding!!.col8.isClickable = false
         binding!!.col9.isClickable = false
-        binding!!.newGameButton.isClickable = false
+        binding!!.backToMainMenuButton.isClickable = false
     }
 
     private fun updatePlayersProfile() {
+        Log.i(GameplayFragment_TAG, "updatePlayersProfile()")
+
         binding!!.player1WinsText.text = "- Wins : $p1NumOfWins"
         binding!!.player1LosesText.text = "- Loses : $p1NumOfLoses"
         binding!!.player2WinsText.text = "- Wins : $p2NumOfWins"
         binding!!.player2LosesText.text = "- Loses : $p2NumOfLoses"
-
-        Log.i("Players profile", "Players profile updated")
     }
 
     private fun updatePlayersCharImage() {
+        Log.i(GameplayFragment_TAG, "updatePlayersCharImage()")
+
         if (player1CharGame == CIRCLE_CHAR) {
             binding!!.player1CharImage.setImageResource(R.drawable.lingkaran)
         }
@@ -273,11 +320,11 @@ class GameplayFragment : Fragment() {
         if (player2CharGame == CROSS_CHAR) {
             binding!!.player2CharImage.setImageResource(R.drawable.silang)
         }
-
-        Log.i("Players char image", "Players char image updated")
     }
 
     private fun isThereAWinner(): Boolean {
+        Log.i(GameplayFragment_TAG, "isThereAWinner()")
+
         if (binding!!.col1.filledBy == PLAYER_1 && binding!!.col2.filledBy == PLAYER_1 && binding!!.col3.filledBy == PLAYER_1) {
             theWinner = PLAYER_1
             return true
@@ -350,6 +397,8 @@ class GameplayFragment : Fragment() {
     }
 
     private fun isDraw(): Boolean {
+        Log.i(GameplayFragment_TAG, "isDraw()")
+
         var count = 0
         if (!binding!!.col1.isEmpty) count++
         if (!binding!!.col2.isEmpty) count++
@@ -365,18 +414,30 @@ class GameplayFragment : Fragment() {
     }
 
     private fun whoIsTheWinner(): String {
+        Log.i(GameplayFragment_TAG, "whoIsTheWinner()")
+
         if (theWinner == PLAYER_1) {
             p1NumOfWins = (p1NumOfWins.toInt() + 1).toString()
+            Log.i(GameplayFragment_TAG, "p1NumOfWins = $p1NumOfWins")
+
             p2NumOfLoses = (p2NumOfLoses.toInt() + 1).toString()
+            Log.i(GameplayFragment_TAG, "p2NumOfLoses = $p2NumOfLoses")
+
             return PLAYER_1
         } else {
             p2NumOfWins = (p2NumOfWins.toInt() + 1).toString()
+            Log.i(GameplayFragment_TAG, "p2NumOfWins = $p2NumOfWins")
+
             p1NumOfLoses = (p1NumOfLoses.toInt() + 1).toString()
+            Log.i(GameplayFragment_TAG, "p1NumOfLoses = $p1NumOfLoses")
+
             return PLAYER_2
         }
     }
 
     private fun savePlayersProfile() {
+        Log.i(GameplayFragment_TAG, "savePlayersProfile()")
+
         requireContext().openFileOutput(p1WinsFileName, Context.MODE_PRIVATE)
             .write(p1NumOfWins.toByteArray())
 
@@ -391,34 +452,41 @@ class GameplayFragment : Fragment() {
     }
 
     private fun readFiles() {
+        Log.i(GameplayFragment_TAG, "readFiles()")
+
         p1NumOfWins = requireContext().openFileInput(p1WinsFileName).reader().readText()
-        Log.i("Read files", "p1NumOfWins = $p1NumOfWins")
+        Log.i(GameplayFragment_TAG, "p1NumOfWins = $p1NumOfWins")
+
         p1NumOfLoses = requireContext().openFileInput(p1LosesFileName).reader().readText()
-        Log.i("Read files", "p1NumOfLoses = $p1NumOfLoses")
+        Log.i(GameplayFragment_TAG, "p1NumOfLoses = $p1NumOfLoses")
+
         p2NumOfWins = requireContext().openFileInput(p2WinsFileName).reader().readText()
-        Log.i("Read files", "p2NumOfWins = $p2NumOfWins")
+        Log.i(GameplayFragment_TAG, "p2NumOfWins = $p2NumOfWins")
+
         p2NumOfLoses = requireContext().openFileInput(p2LosesFileName).reader().readText()
-        Log.i("Read files", "p2NumOfLoses = $p2NumOfLoses")
+        Log.i(GameplayFragment_TAG, "p2NumOfLoses = $p2NumOfLoses")
     }
 
     private fun createFiles() {
+        Log.i(GameplayFragment_TAG, "createFiles")
+
         if (File(requireContext().filesDir, p1WinsFileName).createNewFile()) {
-            Log.i("Create files", "$p1WinsFileName file created")
+            Log.i(GameplayFragment_TAG, "$p1WinsFileName file created")
             requireContext().openFileOutput(p1WinsFileName, Context.MODE_PRIVATE)
                 .write("0".toByteArray())
         }
         if (File(requireContext().filesDir, p1LosesFileName).createNewFile()) {
-            Log.i("Create files", "$p1LosesFileName file created")
+            Log.i(GameplayFragment_TAG, "$p1LosesFileName file created")
             requireContext().openFileOutput(p1LosesFileName, Context.MODE_PRIVATE)
                 .write("0".toByteArray())
         }
         if (File(requireContext().filesDir, p2WinsFileName).createNewFile()) {
-            Log.i("Create files", "$p2WinsFileName file created")
+            Log.i(GameplayFragment_TAG, "$p2WinsFileName file created")
             requireContext().openFileOutput(p2WinsFileName, Context.MODE_PRIVATE)
                 .write("0".toByteArray())
         }
         if (File(requireContext().filesDir, p2LosesFileName).createNewFile()) {
-            Log.i("Create files", "$p2LosesFileName file created")
+            Log.i(GameplayFragment_TAG, "$p2LosesFileName file created")
             requireContext().openFileOutput(p2LosesFileName, Context.MODE_PRIVATE)
                 .write("0".toByteArray())
         }
@@ -426,11 +494,19 @@ class GameplayFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.i("GameplayFragment_lifecycle", "${lifecycle.currentState}")
+        Log.i(GameplayFragment_TAG, "onDestroy()")
+
         player1CharGame = ""
+        Log.i(GameplayFragment_TAG, "player1CharGame = $player1CharGame")
+
         player2CharGame = ""
+        Log.i(GameplayFragment_TAG, "player2CharGame = $player2CharGame")
+
         firstPlay.value = ""
+        Log.i(GameplayFragment_TAG, "firstPlay.value = ${firstPlay.value}")
+
         binding = null
+        Log.i(GameplayFragment_TAG, "binding = $binding")
     }
 
 }

@@ -1,4 +1,4 @@
-package com.nandro.tictactoe.PvP
+package com.nandro.tictactoe.pvp
 
 import androidx.lifecycle.ViewModel
 

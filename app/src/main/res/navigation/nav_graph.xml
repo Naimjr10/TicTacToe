@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameSettingFragment"
-        android:name="com.nandro.tictactoe.PvP.GameSettingFragment"
+        android:name="com.nandro.tictactoe.pvp.GameSettingFragment"
         android:label="fragment_pvp_game_setting"
         tools:layout="@layout/fragment_pvp_game_setting" >
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameplayFragment"
-        android:name="com.nandro.tictactoe.PvP.GameplayFragment"
+        android:name="com.nandro.tictactoe.pvp.GameplayFragment"
         android:label="fragment_pvp_gameplay"
         tools:layout="@layout/fragment_pvp_gameplay" >
         <action

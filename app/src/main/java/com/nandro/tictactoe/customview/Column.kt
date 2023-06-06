@@ -1,8 +1,11 @@
-package com.nandro.tictactoe
+package com.nandro.tictactoe.customview
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
+import com.nandro.tictactoe.R
 
 class Column(context: Context,
              attrs: AttributeSet?): AppCompatImageView(context, attrs) {

@@ -1,4 +1,4 @@
-package com.nandro.tictactoe.PvP
+package com.nandro.tictactoe.pvp
 
 import android.os.Bundle
 import android.util.Log
@@ -6,44 +6,64 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.nandro.tictactoe.R
 import com.nandro.tictactoe.databinding.FragmentPvpGameSettingBinding
+import com.nandro.tictactoe.tag.GameSettingFragment_TAG
 
 class GameSettingFragment : Fragment() {
     companion object GameSetting {
         var firstPlay = MutableLiveData("")
         var player1CharGame = ""
         var player2CharGame = ""
-        const val CROSS_CHAR = "Cross"
-        const val CIRCLE_CHAR = "Circle"
-        const val PLAYER_1 = "Player 1"
-        const val PLAYER_2 = "Player 2"
     }
 
-    var binding: FragmentPvpGameSettingBinding? = null
-
-    //lateinit var viewModel: GameSettingViewModel
+    private var binding: FragmentPvpGameSettingBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("GameSettingFragment", "created")
-        //val viewModelFactory = ViewModelProvider.NewInstanceFactory()
-        //viewModel = ViewModelProvider(requireActivity() as AppCompatActivity).get(GameSettingViewModel::class.java)
-        Log.d("parentFragment","$parentFragment")
+        Log.i(GameSettingFragment_TAG, "onCreate()")
+
+        // Implement custom BACK Navigation
+        val callBack = object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.i(GameSettingFragment_TAG, "handleOnBackPressed()")
+
+                firstPlay.value = ""
+                Log.i(GameSettingFragment_TAG, "firstPlay.value = ${firstPlay.value}")
+                player1CharGame = ""
+                Log.i(GameSettingFragment_TAG, "player1CharGame = ${player1CharGame}")
+                player2CharGame = ""
+                Log.i(GameSettingFragment_TAG, "player2CharGame = ${player2CharGame}")
+
+                // Navigate back to MainMenuFragment
+                findNavController().popBackStack()
+            }
+        }
+        // Apply the custom BACK Navigation only to this activity ( GameSettingFragment )
+        requireActivity().onBackPressedDispatcher.addCallback(this, callBack)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPvpGameSettingBinding.inflate(inflater, container, false)
+        Log.i(GameSettingFragment_TAG, "onCreateView()")
 
-        firstPlay?.observe(requireActivity()) {
+        // Inflate layout
+        binding = FragmentPvpGameSettingBinding.inflate(inflater, container, false)
+        Log.i(GameSettingFragment_TAG, "binding = $binding")
+
+        // Observe the firstPlay value and update chooseCharText text immediately
+        // when the value changes
+        firstPlay.observe(requireActivity()) {
+            Log.i(GameSettingFragment_TAG, "firstPlay.observe()")
+
             binding!!.chooseCharText.text = "Please, Choose your character \n$it"
         }
 
@@ -52,15 +72,21 @@ class GameSettingFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        makeWhoFirstViewsVisible()
-        makeChooseCharViewslittleVisible()
+        Log.i(GameSettingFragment_TAG, "onViewCreated()")
+
+        makeWhoFirstViews_Visible()
+        makeChooseCharViews_littleVisible()
 
         binding!!.confirmButton.setOnClickListener {
-            
-            if (firstPlay!!.value != "") {
-                makeWhoFirstViewslittleVisible()
-                makeChooseCharViewsVisible()
+            it as AppCompatButton
+            Log.i(GameSettingFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
 
+            // Check whether the first to play has been determined
+            if (firstPlay.value != "") {
+                makeWhoFirstViews_littleVisible()
+                makeChooseCharViews_Visible()
+
+                // Check whether the first player has selected character
                 if (player1CharGame != "" && player2CharGame != "") {
                     findNavController().navigate(R.id.action_gameSettingFragment_to_gameplayFragment)
                 }
@@ -70,68 +96,100 @@ class GameSettingFragment : Fragment() {
         }
     }
 
-    private fun makeWhoFirstViewslittleVisible() {
+    private fun makeWhoFirstViews_littleVisible() {
+        Log.i(GameSettingFragment_TAG, "makeWhoFirstViews_littleVisible()")
+
         binding!!.whoFirstText.alpha = 0.1F
         binding!!.whoFirstRadioGroup.alpha = 0.1F
         binding!!.p1RadioButton.isClickable = false
         binding!!.p2RadioButton.isClickable = false
+
     }
 
-    private fun makeWhoFirstViewsVisible() {
+    private fun makeWhoFirstViews_Visible() {
+        Log.i(GameSettingFragment_TAG, "makeWhoFirstViews_Visible()")
+
         binding!!.whoFirstText.alpha = 1F
         binding!!.whoFirstRadioGroup.alpha = 1F
 
         binding!!.p1RadioButton.setOnClickListener {
-            firstPlay!!.value = PLAYER_1
-            Log.d("P1RadioButton", "clickable")
+            it as RadioButton
+            firstPlay.value = PLAYER_1
+            Log.i(GameSettingFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
         }
         binding!!.p2RadioButton.setOnClickListener{
-            firstPlay!!.value = PLAYER_2
-            Log.d("P2RadioButton", "clickable")
+            it as RadioButton
+            firstPlay.value = PLAYER_2
+            Log.i(GameSettingFragment_TAG, "${it.contentDescription}.setOnClickListener{}")
         }
+
     }
 
-    private fun makeChooseCharViewslittleVisible() {
+    private fun makeChooseCharViews_littleVisible() {
+        Log.i(GameSettingFragment_TAG, "makeChooseCharViews_littleVisible()")
+
         binding!!.chooseCharText.alpha = 0.1F
         binding!!.imageAndRadioWrapper.alpha = 0.1F
         binding!!.circleRadioButton.isClickable = false
         binding!!.crossRadioButton.isClickable = false
-
     }
 
-    private fun makeChooseCharViewsVisible() {
+    private fun makeChooseCharViews_Visible() {
+        Log.i(GameSettingFragment_TAG, "makeChooseCharViews_Visible()")
+
         binding!!.chooseCharText.alpha = 1F
         binding!!.imageAndRadioWrapper.alpha = 1F
+
         binding!!.circleRadioButton.setOnClickListener {
-            if (firstPlay!!.value == PLAYER_1) {
+            Log.i(GameSettingFragment_TAG, "${it.contentDescription} clicked")
+
+            if (firstPlay.value == PLAYER_1) {
                 player1CharGame = CIRCLE_CHAR
+                Log.i(GameSettingFragment_TAG, "player1CharGame = $player1CharGame")
+
                 player2CharGame = CROSS_CHAR
+                Log.i(GameSettingFragment_TAG, "player2CharGame = $player2CharGame")
             }
-            if (firstPlay!!.value == PLAYER_2) {
+            if (firstPlay.value == PLAYER_2) {
                 player2CharGame = CIRCLE_CHAR
+                Log.i(GameSettingFragment_TAG, "player2CharGame = $player2CharGame")
+
                 player1CharGame = CROSS_CHAR
+                Log.i(GameSettingFragment_TAG, "player1CharGame = $player1CharGame")
             }
         }
         binding!!.crossRadioButton.setOnClickListener {
-            if (firstPlay!!.value == PLAYER_1) {
+            Log.i(GameSettingFragment_TAG, "${it.contentDescription} clicked")
+
+            if (firstPlay.value == PLAYER_1) {
                 player1CharGame = CROSS_CHAR
+                Log.i(GameSettingFragment_TAG, "player1CharGame = $player1CharGame")
+
                 player2CharGame = CIRCLE_CHAR
+                Log.i(GameSettingFragment_TAG, "player2CharGame = $player2CharGame")
             }
-            if (firstPlay!!.value == PLAYER_2) {
+            if (firstPlay.value == PLAYER_2) {
                 player2CharGame = CROSS_CHAR
+                Log.i(GameSettingFragment_TAG, "player2CharGame = $player2CharGame")
+
                 player1CharGame = CIRCLE_CHAR
+                Log.i(GameSettingFragment_TAG, "player1CharGame = $player1CharGame")
             }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.i(GameSettingFragment_TAG, "onDestroyView()")
+
         binding = null
+        Log.i(GameSettingFragment_TAG, "binding = $binding")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("GameSettingFragment", "destroyed")
+        Log.i(GameSettingFragment_TAG, "onDestroy()")
+
         firstPlay.removeObservers(requireActivity())
     }
 

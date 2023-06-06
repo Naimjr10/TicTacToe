@@ -143,7 +143,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/new_game_button"
+        app:layout_constraintBottom_toTopOf="@+id/back_to_main_menu_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/players_profil_wrapper"
@@ -160,7 +160,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.nandro.tictactoe.Column
+        <com.nandro.tictactoe.customview.Column
             android:id="@+id/col_1"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -171,7 +171,7 @@
             app:layout_constraintEnd_toStartOf="@+id/col_2"
             tools:src="@drawable/lingkaran" />
 
-        <com.nandro.tictactoe.Column
+        <com.nandro.tictactoe.customview.Column
             android:id="@+id/col_2"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -182,7 +182,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:src="@drawable/silang" />
 
-        <com.nandro.tictactoe.Column
+        <com.nandro.tictactoe.customview.Column
             android:id="@+id/col_3"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -193,7 +193,7 @@
             app:layout_constraintStart_toEndOf="@+id/col_2"
             tools:src="@drawable/lingkaran" />
 
-        <com.nandro.tictactoe.Column
+        <com.nandro.tictactoe.customview.Column
             android:id="@+id/col_4"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -204,7 +204,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/silang" />
 
-        <com.nandro.tictactoe.Column
+        <com.nandro.tictactoe.customview.Column
             android:id="@+id/col_5"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -215,7 +215,7 @@
             app:layout_constraintTop_toTopOf="@+id/frame_constraint"
             tools:src="@drawable/lingkaran" />
 
-        <com.nandro.tictactoe.Column
+        <com.nandro.tictactoe.customview.Column
             android:id="@+id/col_6"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -226,7 +226,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/silang" />
 
-        <com.nandro.tictactoe.Column
+        <com.nandro.tictactoe.customview.Column
             android:id="@+id/col_7"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -237,7 +237,7 @@
             app:layout_constraintTop_toBottomOf="@+id/col_4"
             tools:src="@drawable/lingkaran" />
 
-        <com.nandro.tictactoe.Column
+        <com.nandro.tictactoe.customview.Column
             android:id="@+id/col_8"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -248,7 +248,7 @@
             app:layout_constraintTop_toBottomOf="@+id/col_5"
             tools:src="@drawable/silang" />
 
-        <com.nandro.tictactoe.Column
+        <com.nandro.tictactoe.customview.Column
             android:id="@+id/col_9"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -262,12 +262,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/new_game_button"
+        android:id="@+id/back_to_main_menu_button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:background="@color/white"
-        android:text="Start a New Game"
+        android:contentDescription="main_menu_button"
+        android:text="Back To Main Menu"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
