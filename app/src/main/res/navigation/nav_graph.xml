@@ -11,8 +11,11 @@
         android:label="fragment_main_menu"
         tools:layout="@layout/fragment_main_menu" >
         <action
-            android:id="@+id/action_mainMenuFragment_to_gameSettingFragment"
+            android:id="@+id/action_mainMenuFragment_to_pvp_gameSettingFragment"
             app:destination="@id/gameSettingFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_pvcom_gameSettingFragment"
+            app:destination="@id/gameSettingFragment2" />
     </fragment>
     <fragment
         android:id="@+id/gameSettingFragment"
@@ -20,7 +23,7 @@
         android:label="fragment_pvp_game_setting"
         tools:layout="@layout/fragment_pvp_game_setting" >
         <action
-            android:id="@+id/action_gameSettingFragment_to_gameplayFragment"
+            android:id="@+id/action_pvp_gameSettingFragment_to_pvp_gameplayFragment"
             app:destination="@id/gameplayFragment"
             app:popUpTo="@id/mainMenuFragment" />
     </fragment>
@@ -30,13 +33,32 @@
         android:label="fragment_pvp_gameplay"
         tools:layout="@layout/fragment_pvp_gameplay" >
         <action
-            android:id="@+id/action_gameplayFragment_to_gameSettingFragment"
+            android:id="@+id/action_pvp_gameplayFragment_to_pvp_gameSettingFragment"
             app:destination="@id/gameSettingFragment"
             app:popUpTo="@id/mainMenuFragment" />
         <action
-            android:id="@+id/action_gameplayFragment_to_mainMenuFragment"
+            android:id="@+id/action_pvp_gameplayFragment_to_mainMenuFragment"
             app:destination="@id/mainMenuFragment"
             app:popUpTo="@id/mainMenuFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameSettingFragment2"
+        android:name="com.nandro.tictactoe.pvcom.GameSettingFragment"
+        android:label="GameSettingFragment" >
+        <action
+            android:id="@+id/action_pvcom_gameSettingFragment_to_pvcom_gameplayFragment"
+            app:destination="@id/gameplayFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameplayFragment2"
+        android:name="com.nandro.tictactoe.pvcom.GameplayFragment"
+        android:label="GameplayFragment" >
+        <action
+            android:id="@+id/action_pvcom_gameplayFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+        <action
+            android:id="@+id/action_pvcom_gameplayFragment_to_pvcom_gameSettingFragment"
+            app:destination="@id/gameSettingFragment2" />
     </fragment>
 </navigation>
