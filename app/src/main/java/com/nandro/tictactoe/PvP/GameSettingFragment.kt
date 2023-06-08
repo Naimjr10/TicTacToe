@@ -17,11 +17,15 @@ import com.nandro.tictactoe.databinding.FragmentPvpGameSettingBinding
 import com.nandro.tictactoe.tag.GameSettingFragment_pvp_TAG
 
 class GameSettingFragment : Fragment() {
-    companion object GameSetting {
-        var firstPlay = MutableLiveData("")
-        var player1CharGame = ""
-        var player2CharGame = ""
+    companion object {
+        const val FIRST_PLAY_KEY = "firstPlay_KEY"
+        const val PLAYER1_CHAR_GAME_KEY = "player1CharGame_KEY"
+        const val PLAYER2_CHAR_GAME_KEY = "player2CharGame_KEY"
     }
+
+    private var firstPlay = MutableLiveData("")
+    private var player1CharGame = ""
+    private var player2CharGame = ""
 
     private var binding: FragmentPvpGameSettingBinding? = null
 
@@ -30,7 +34,7 @@ class GameSettingFragment : Fragment() {
         Log.i(GameSettingFragment_pvp_TAG, "onCreate()")
 
         // Implement custom BACK Navigation
-        val callBack = object: OnBackPressedCallback(true) {
+        val callBack = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Log.i(GameSettingFragment_pvp_TAG, "handleOnBackPressed()")
 
@@ -88,10 +92,18 @@ class GameSettingFragment : Fragment() {
 
                 // Check whether the first player has selected character
                 if (player1CharGame != "" && player2CharGame != "") {
-                    findNavController().navigate(R.id.action_pvp_gameSettingFragment_to_pvp_gameplayFragment)
+                    val bundle = Bundle().apply {
+                        putString(FIRST_PLAY_KEY, firstPlay.value)
+                        putString(PLAYER1_CHAR_GAME_KEY, player1CharGame)
+                        putString(PLAYER2_CHAR_GAME_KEY, player2CharGame)
+                    }
+                    findNavController().navigate(
+                        R.id.action_pvp_gameSettingFragment_to_pvp_gameplayFragment,
+                        bundle)
                 }
             } else {
-                Toast.makeText(context,"Please, choose who play first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Please, choose who play first", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -117,7 +129,7 @@ class GameSettingFragment : Fragment() {
             firstPlay.value = PLAYER_1
             Log.i(GameSettingFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
         }
-        binding!!.p2RadioButton.setOnClickListener{
+        binding!!.p2RadioButton.setOnClickListener {
             it as RadioButton
             firstPlay.value = PLAYER_2
             Log.i(GameSettingFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")

@@ -3,12 +3,14 @@ package com.nandro.tictactoe.pvp
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.animation.AlphaAnimation
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
@@ -16,9 +18,9 @@ import androidx.navigation.fragment.findNavController
 import com.nandro.tictactoe.customview.Column
 import com.nandro.tictactoe.R
 import com.nandro.tictactoe.databinding.FragmentPvpGameplayBinding
-import com.nandro.tictactoe.pvp.GameSettingFragment.GameSetting.player1CharGame
-import com.nandro.tictactoe.pvp.GameSettingFragment.GameSetting.player2CharGame
-import com.nandro.tictactoe.pvp.GameSettingFragment.GameSetting.firstPlay
+import com.nandro.tictactoe.pvp.GameSettingFragment.Companion.FIRST_PLAY_KEY
+import com.nandro.tictactoe.pvp.GameSettingFragment.Companion.PLAYER1_CHAR_GAME_KEY
+import com.nandro.tictactoe.pvp.GameSettingFragment.Companion.PLAYER2_CHAR_GAME_KEY
 import com.nandro.tictactoe.tag.GameplayFragment_pvp_TAG
 import java.io.File
 
@@ -32,18 +34,25 @@ class GameplayFragment : Fragment() {
     private lateinit var p2NumOfWins: String
     private lateinit var p2NumOfLoses: String
 
-    init {
-        if (firstPlay.value == PLAYER_1) {
-            onTurn = PLAYER_1
-        }
-        if (firstPlay.value == PLAYER_2) {
-            onTurn = PLAYER_2
-        }
-    }
+    private var firstPlay: String? = null
+    private var player1CharGame: String? = null
+    private var player2CharGame: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(GameplayFragment_pvp_TAG, "onCreate()")
+
+        firstPlay= requireArguments().getString(FIRST_PLAY_KEY)
+        player1CharGame = requireArguments().getString(PLAYER1_CHAR_GAME_KEY)
+        player2CharGame = requireArguments().getString(PLAYER2_CHAR_GAME_KEY)
+
+        if (firstPlay == PLAYER_1) {
+            onTurn = PLAYER_1
+        }
+        if (firstPlay == PLAYER_2) {
+            onTurn = PLAYER_2
+        }
 
         createFiles() // Create files if the files don't exist
         readFiles() // Read the files
@@ -193,10 +202,15 @@ class GameplayFragment : Fragment() {
 
         // Check whether the game is over
         if (isGameOver()) {
-            prompt()
             makeGameplayNotClickable()
-            updatePlayersProfile()
-            savePlayersProfile() // Save players profile to the files
+            object : CountDownTimer(3000, 1000) {
+                override fun onTick(p0: Long) {}
+                override fun onFinish() {
+                    prompt()
+                    updatePlayersProfile()
+                    savePlayersProfile() // Save players profile to the files
+                }
+            }.start()
         }
     }
 
@@ -326,34 +340,66 @@ class GameplayFragment : Fragment() {
         Log.i(GameplayFragment_pvp_TAG, "isThereAWinner()")
 
         if (binding!!.col1.filledBy == PLAYER_1 && binding!!.col2.filledBy == PLAYER_1 && binding!!.col3.filledBy == PLAYER_1) {
+            binding!!.col1.apply { startAnimation(this.animation) }
+            binding!!.col2.apply { startAnimation(this.animation) }
+            binding!!.col3.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col4.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col6.filledBy == PLAYER_1) {
+            binding!!.col4.apply { startAnimation(this.animation) }
+            binding!!.col5.apply { startAnimation(this.animation) }
+            binding!!.col6.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col7.filledBy == PLAYER_1 && binding!!.col8.filledBy == PLAYER_1 && binding!!.col9.filledBy == PLAYER_1) {
+            binding!!.col7.apply { startAnimation(this.animation) }
+            binding!!.col8.apply { startAnimation(this.animation) }
+            binding!!.col9.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col1.filledBy == PLAYER_1 && binding!!.col4.filledBy == PLAYER_1 && binding!!.col7.filledBy == PLAYER_1) {
+            binding!!.col1.apply { startAnimation(this.animation) }
+            binding!!.col4.apply { startAnimation(this.animation) }
+            binding!!.col7.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col2.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col8.filledBy == PLAYER_1) {
+            binding!!.col2.apply { startAnimation(this.animation) }
+            binding!!.col5.apply { startAnimation(this.animation) }
+            binding!!.col8.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col3.filledBy == PLAYER_1 && binding!!.col6.filledBy == PLAYER_1 && binding!!.col9.filledBy == PLAYER_1) {
+            binding!!.col3.apply { startAnimation(this.animation) }
+            binding!!.col6.apply { startAnimation(this.animation) }
+            binding!!.col9.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col1.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col9.filledBy == PLAYER_1) {
+            binding!!.col1.apply { startAnimation(this.animation) }
+            binding!!.col5.apply { startAnimation(this.animation) }
+            binding!!.col9.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col3.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col7.filledBy == PLAYER_1) {
+            binding!!.col3.apply { startAnimation(this.animation) }
+            binding!!.col5.apply { startAnimation(this.animation) }
+            binding!!.col7.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_1
             return true
         }
@@ -361,34 +407,66 @@ class GameplayFragment : Fragment() {
         /*--------------------------------------------------------------------------------------------------*/
 
         if (binding!!.col1.filledBy == PLAYER_2 && binding!!.col2.filledBy == PLAYER_2 && binding!!.col3.filledBy == PLAYER_2) {
+            binding!!.col1.apply { startAnimation(this.animation) }
+            binding!!.col2.apply { startAnimation(this.animation) }
+            binding!!.col3.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col4.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col6.filledBy == PLAYER_2) {
+            binding!!.col4.apply { startAnimation(this.animation) }
+            binding!!.col5.apply { startAnimation(this.animation) }
+            binding!!.col6.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col7.filledBy == PLAYER_2 && binding!!.col8.filledBy == PLAYER_2 && binding!!.col9.filledBy == PLAYER_2) {
+            binding!!.col7.apply { startAnimation(this.animation) }
+            binding!!.col8.apply { startAnimation(this.animation) }
+            binding!!.col9.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col1.filledBy == PLAYER_2 && binding!!.col4.filledBy == PLAYER_2 && binding!!.col7.filledBy == PLAYER_2) {
+            binding!!.col1.apply { startAnimation(this.animation) }
+            binding!!.col4.apply { startAnimation(this.animation) }
+            binding!!.col7.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col2.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col8.filledBy == PLAYER_2) {
+            binding!!.col2.apply { startAnimation(this.animation) }
+            binding!!.col5.apply { startAnimation(this.animation) }
+            binding!!.col8.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col3.filledBy == PLAYER_2 && binding!!.col6.filledBy == PLAYER_2 && binding!!.col9.filledBy == PLAYER_2) {
+            binding!!.col3.apply { startAnimation(this.animation) }
+            binding!!.col6.apply { startAnimation(this.animation) }
+            binding!!.col9.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col1.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col9.filledBy == PLAYER_2) {
+            binding!!.col1.apply { startAnimation(this.animation) }
+            binding!!.col5.apply { startAnimation(this.animation) }
+            binding!!.col9.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col3.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col7.filledBy == PLAYER_2) {
+            binding!!.col3.apply { startAnimation(this.animation) }
+            binding!!.col5.apply { startAnimation(this.animation) }
+            binding!!.col7.apply { startAnimation(this.animation) }
+
             theWinner = PLAYER_2
             return true
         }
@@ -496,17 +574,8 @@ class GameplayFragment : Fragment() {
         super.onDestroy()
         Log.i(GameplayFragment_pvp_TAG, "onDestroy()")
 
-        player1CharGame = ""
-        Log.i(GameplayFragment_pvp_TAG, "player1CharGame = $player1CharGame")
-
-        player2CharGame = ""
-        Log.i(GameplayFragment_pvp_TAG, "player2CharGame = $player2CharGame")
-
-        firstPlay.value = ""
-        Log.i(GameplayFragment_pvp_TAG, "firstPlay.value = ${firstPlay.value}")
-
         binding = null
-        Log.i(GameplayFragment_pvp_TAG, "binding = $binding")
+        Log.i(GameplayFragment_pvp_TAG, "binding = null")
     }
 
 }
