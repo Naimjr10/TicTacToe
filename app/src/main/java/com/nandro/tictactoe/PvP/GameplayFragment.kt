@@ -124,7 +124,19 @@ class GameplayFragment : Fragment() {
                 fillTheColumn(it)
                 it.isEmpty = false
             }
-            onResume()
+            // Check whether the game is over
+            if (isGameOver()) {
+                onTurn.value = ""
+                makeGameplayNotClickable()
+                object : CountDownTimer(3000, 1000) {
+                    override fun onTick(p0: Long) {}
+                    override fun onFinish() {
+                        prompt()
+                        updatePlayersProfile()
+                        savePlayersProfile() // Save players profile to the files
+                    }
+                }.start()
+            }
         }
         binding!!.col2.setOnClickListener {
             Log.i(GameplayFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
@@ -135,7 +147,19 @@ class GameplayFragment : Fragment() {
                 fillTheColumn(it)
                 it.isEmpty = false
             }
-            onResume()
+            // Check whether the game is over
+            if (isGameOver()) {
+                onTurn.value = ""
+                makeGameplayNotClickable()
+                object : CountDownTimer(3000, 1000) {
+                    override fun onTick(p0: Long) {}
+                    override fun onFinish() {
+                        prompt()
+                        updatePlayersProfile()
+                        savePlayersProfile() // Save players profile to the files
+                    }
+                }.start()
+            }
         }
         binding!!.col3.setOnClickListener {
             Log.i(GameplayFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
@@ -146,7 +170,19 @@ class GameplayFragment : Fragment() {
                 fillTheColumn(it)
                 it.isEmpty = false
             }
-            onResume()
+            // Check whether the game is over
+            if (isGameOver()) {
+                onTurn.value = ""
+                makeGameplayNotClickable()
+                object : CountDownTimer(3000, 1000) {
+                    override fun onTick(p0: Long) {}
+                    override fun onFinish() {
+                        prompt()
+                        updatePlayersProfile()
+                        savePlayersProfile() // Save players profile to the files
+                    }
+                }.start()
+            }
         }
         binding!!.col4.setOnClickListener {
             Log.i(GameplayFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
@@ -157,7 +193,19 @@ class GameplayFragment : Fragment() {
                 fillTheColumn(it)
                 it.isEmpty = false
             }
-            onResume()
+            // Check whether the game is over
+            if (isGameOver()) {
+                onTurn.value = ""
+                makeGameplayNotClickable()
+                object : CountDownTimer(3000, 1000) {
+                    override fun onTick(p0: Long) {}
+                    override fun onFinish() {
+                        prompt()
+                        updatePlayersProfile()
+                        savePlayersProfile() // Save players profile to the files
+                    }
+                }.start()
+            }
         }
         binding!!.col5.setOnClickListener {
             Log.i(GameplayFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
@@ -168,7 +216,19 @@ class GameplayFragment : Fragment() {
                 fillTheColumn(it)
                 it.isEmpty = false
             }
-            onResume()
+            // Check whether the game is over
+            if (isGameOver()) {
+                onTurn.value = ""
+                makeGameplayNotClickable()
+                object : CountDownTimer(3000, 1000) {
+                    override fun onTick(p0: Long) {}
+                    override fun onFinish() {
+                        prompt()
+                        updatePlayersProfile()
+                        savePlayersProfile() // Save players profile to the files
+                    }
+                }.start()
+            }
         }
         binding!!.col6.setOnClickListener {
             Log.i(GameplayFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
@@ -179,7 +239,19 @@ class GameplayFragment : Fragment() {
                 fillTheColumn(it)
                 it.isEmpty = false
             }
-            onResume()
+            // Check whether the game is over
+            if (isGameOver()) {
+                onTurn.value = ""
+                makeGameplayNotClickable()
+                object : CountDownTimer(3000, 1000) {
+                    override fun onTick(p0: Long) {}
+                    override fun onFinish() {
+                        prompt()
+                        updatePlayersProfile()
+                        savePlayersProfile() // Save players profile to the files
+                    }
+                }.start()
+            }
         }
         binding!!.col7.setOnClickListener {
             Log.i(GameplayFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
@@ -190,7 +262,19 @@ class GameplayFragment : Fragment() {
                 fillTheColumn(it)
                 it.isEmpty = false
             }
-            onResume()
+            // Check whether the game is over
+            if (isGameOver()) {
+                onTurn.value = ""
+                makeGameplayNotClickable()
+                object : CountDownTimer(3000, 1000) {
+                    override fun onTick(p0: Long) {}
+                    override fun onFinish() {
+                        prompt()
+                        updatePlayersProfile()
+                        savePlayersProfile() // Save players profile to the files
+                    }
+                }.start()
+            }
         }
         binding!!.col8.setOnClickListener {
             Log.i(GameplayFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
@@ -201,7 +285,19 @@ class GameplayFragment : Fragment() {
                 fillTheColumn(it)
                 it.isEmpty = false
             }
-            onResume()
+            // Check whether the game is over
+            if (isGameOver()) {
+                onTurn.value = ""
+                makeGameplayNotClickable()
+                object : CountDownTimer(3000, 1000) {
+                    override fun onTick(p0: Long) {}
+                    override fun onFinish() {
+                        prompt()
+                        updatePlayersProfile()
+                        savePlayersProfile() // Save players profile to the files
+                    }
+                }.start()
+            }
         }
         binding!!.col9.setOnClickListener {
             Log.i(GameplayFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
@@ -212,7 +308,19 @@ class GameplayFragment : Fragment() {
                 fillTheColumn(it)
                 it.isEmpty = false
             }
-            onResume()
+            // Check whether the game is over
+            if (isGameOver()) {
+                onTurn.value = ""
+                makeGameplayNotClickable()
+                object : CountDownTimer(3000, 1000) {
+                    override fun onTick(p0: Long) {}
+                    override fun onFinish() {
+                        prompt()
+                        updatePlayersProfile()
+                        savePlayersProfile() // Save players profile to the files
+                    }
+                }.start()
+            }
         }
 
         binding!!.backToMainMenuButton.setOnClickListener {
@@ -220,25 +328,6 @@ class GameplayFragment : Fragment() {
 
             // Navigate to MainMenuFragment
             findNavController().navigate(R.id.action_pvp_gameplayFragment_to_mainMenuFragment)
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.i(GameplayFragment_pvp_TAG, "onResume()")
-
-        // Check whether the game is over
-        if (isGameOver()) {
-            onTurn.value = ""
-            makeGameplayNotClickable()
-            object : CountDownTimer(3000, 1000) {
-                override fun onTick(p0: Long) {}
-                override fun onFinish() {
-                    prompt()
-                    updatePlayersProfile()
-                    savePlayersProfile() // Save players profile to the files
-                }
-            }.start()
         }
     }
 
