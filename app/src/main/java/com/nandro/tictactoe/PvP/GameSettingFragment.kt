@@ -102,7 +102,7 @@ class GameSettingFragment : Fragment() {
                         bundle)
                 }
             } else {
-                Toast.makeText(context, "Please, choose who play first", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "Please, choose who first to play", Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -115,7 +115,6 @@ class GameSettingFragment : Fragment() {
         binding!!.whoFirstRadioGroup.alpha = 0.1F
         binding!!.p1RadioButton.isClickable = false
         binding!!.p2RadioButton.isClickable = false
-
     }
 
     private fun makeWhoFirstViews_Visible() {
@@ -134,7 +133,6 @@ class GameSettingFragment : Fragment() {
             firstPlay.value = PLAYER_2
             Log.i(GameSettingFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
         }
-
     }
 
     private fun makeChooseCharViews_littleVisible() {
@@ -196,13 +194,13 @@ class GameSettingFragment : Fragment() {
 
         binding = null
         Log.i(GameSettingFragment_pvp_TAG, "binding = $binding")
+
+        firstPlay.removeObservers(requireActivity())
     }
 
     override fun onDestroy() {
         super.onDestroy()
         Log.i(GameSettingFragment_pvp_TAG, "onDestroy()")
-
-        firstPlay.removeObservers(requireActivity())
     }
 
 }

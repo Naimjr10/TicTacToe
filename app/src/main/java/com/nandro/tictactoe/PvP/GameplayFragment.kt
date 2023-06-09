@@ -272,8 +272,8 @@ class GameplayFragment : Fragment() {
             setContentView(R.layout.dialog_game_over)
             window!!.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL)
             val gameOverText = findViewById<AppCompatTextView>(R.id.game_over_text)
-            if (isThereAWinner()) {
-                gameOverText.text = "${whoIsTheWinner()} won!!"
+            if (theWinner != "") {
+                gameOverText.text = "${whoIsTheWinner()} win!!"
             } else {
                 gameOverText.text = "Draw!!"
             }
@@ -340,65 +340,65 @@ class GameplayFragment : Fragment() {
         Log.i(GameplayFragment_pvp_TAG, "isThereAWinner()")
 
         if (binding!!.col1.filledBy == PLAYER_1 && binding!!.col2.filledBy == PLAYER_1 && binding!!.col3.filledBy == PLAYER_1) {
-            binding!!.col1.apply { startAnimation(this.animation) }
-            binding!!.col2.apply { startAnimation(this.animation) }
-            binding!!.col3.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col1)
+            playAnimation(binding!!.col2)
+            playAnimation(binding!!.col3)
 
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col4.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col6.filledBy == PLAYER_1) {
-            binding!!.col4.apply { startAnimation(this.animation) }
-            binding!!.col5.apply { startAnimation(this.animation) }
-            binding!!.col6.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col4)
+            playAnimation(binding!!.col5)
+            playAnimation(binding!!.col6)
 
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col7.filledBy == PLAYER_1 && binding!!.col8.filledBy == PLAYER_1 && binding!!.col9.filledBy == PLAYER_1) {
-            binding!!.col7.apply { startAnimation(this.animation) }
-            binding!!.col8.apply { startAnimation(this.animation) }
-            binding!!.col9.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col7)
+            playAnimation(binding!!.col8)
+            playAnimation(binding!!.col9)
 
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col1.filledBy == PLAYER_1 && binding!!.col4.filledBy == PLAYER_1 && binding!!.col7.filledBy == PLAYER_1) {
-            binding!!.col1.apply { startAnimation(this.animation) }
-            binding!!.col4.apply { startAnimation(this.animation) }
-            binding!!.col7.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col1)
+            playAnimation(binding!!.col4)
+            playAnimation(binding!!.col7)
 
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col2.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col8.filledBy == PLAYER_1) {
-            binding!!.col2.apply { startAnimation(this.animation) }
-            binding!!.col5.apply { startAnimation(this.animation) }
-            binding!!.col8.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col2)
+            playAnimation(binding!!.col5)
+            playAnimation(binding!!.col8)
 
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col3.filledBy == PLAYER_1 && binding!!.col6.filledBy == PLAYER_1 && binding!!.col9.filledBy == PLAYER_1) {
-            binding!!.col3.apply { startAnimation(this.animation) }
-            binding!!.col6.apply { startAnimation(this.animation) }
-            binding!!.col9.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col3)
+            playAnimation(binding!!.col6)
+            playAnimation(binding!!.col9)
 
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col1.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col9.filledBy == PLAYER_1) {
-            binding!!.col1.apply { startAnimation(this.animation) }
-            binding!!.col5.apply { startAnimation(this.animation) }
-            binding!!.col9.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col1)
+            playAnimation(binding!!.col5)
+            playAnimation(binding!!.col9)
 
             theWinner = PLAYER_1
             return true
         }
         if (binding!!.col3.filledBy == PLAYER_1 && binding!!.col5.filledBy == PLAYER_1 && binding!!.col7.filledBy == PLAYER_1) {
-            binding!!.col3.apply { startAnimation(this.animation) }
-            binding!!.col5.apply { startAnimation(this.animation) }
-            binding!!.col7.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col3)
+            playAnimation(binding!!.col5)
+            playAnimation(binding!!.col7)
 
             theWinner = PLAYER_1
             return true
@@ -407,65 +407,65 @@ class GameplayFragment : Fragment() {
         /*--------------------------------------------------------------------------------------------------*/
 
         if (binding!!.col1.filledBy == PLAYER_2 && binding!!.col2.filledBy == PLAYER_2 && binding!!.col3.filledBy == PLAYER_2) {
-            binding!!.col1.apply { startAnimation(this.animation) }
-            binding!!.col2.apply { startAnimation(this.animation) }
-            binding!!.col3.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col1)
+            playAnimation(binding!!.col2)
+            playAnimation(binding!!.col3)
 
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col4.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col6.filledBy == PLAYER_2) {
-            binding!!.col4.apply { startAnimation(this.animation) }
-            binding!!.col5.apply { startAnimation(this.animation) }
-            binding!!.col6.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col4)
+            playAnimation(binding!!.col5)
+            playAnimation(binding!!.col6)
 
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col7.filledBy == PLAYER_2 && binding!!.col8.filledBy == PLAYER_2 && binding!!.col9.filledBy == PLAYER_2) {
-            binding!!.col7.apply { startAnimation(this.animation) }
-            binding!!.col8.apply { startAnimation(this.animation) }
-            binding!!.col9.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col7)
+            playAnimation(binding!!.col8)
+            playAnimation(binding!!.col9)
 
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col1.filledBy == PLAYER_2 && binding!!.col4.filledBy == PLAYER_2 && binding!!.col7.filledBy == PLAYER_2) {
-            binding!!.col1.apply { startAnimation(this.animation) }
-            binding!!.col4.apply { startAnimation(this.animation) }
-            binding!!.col7.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col1)
+            playAnimation(binding!!.col4)
+            playAnimation(binding!!.col7)
 
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col2.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col8.filledBy == PLAYER_2) {
-            binding!!.col2.apply { startAnimation(this.animation) }
-            binding!!.col5.apply { startAnimation(this.animation) }
-            binding!!.col8.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col2)
+            playAnimation(binding!!.col5)
+            playAnimation(binding!!.col8)
 
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col3.filledBy == PLAYER_2 && binding!!.col6.filledBy == PLAYER_2 && binding!!.col9.filledBy == PLAYER_2) {
-            binding!!.col3.apply { startAnimation(this.animation) }
-            binding!!.col6.apply { startAnimation(this.animation) }
-            binding!!.col9.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col3)
+            playAnimation(binding!!.col6)
+            playAnimation(binding!!.col9)
 
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col1.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col9.filledBy == PLAYER_2) {
-            binding!!.col1.apply { startAnimation(this.animation) }
-            binding!!.col5.apply { startAnimation(this.animation) }
-            binding!!.col9.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col1)
+            playAnimation(binding!!.col5)
+            playAnimation(binding!!.col9)
 
             theWinner = PLAYER_2
             return true
         }
         if (binding!!.col3.filledBy == PLAYER_2 && binding!!.col5.filledBy == PLAYER_2 && binding!!.col7.filledBy == PLAYER_2) {
-            binding!!.col3.apply { startAnimation(this.animation) }
-            binding!!.col5.apply { startAnimation(this.animation) }
-            binding!!.col7.apply { startAnimation(this.animation) }
+            playAnimation(binding!!.col3)
+            playAnimation(binding!!.col5)
+            playAnimation(binding!!.col7)
 
             theWinner = PLAYER_2
             return true
@@ -487,6 +487,18 @@ class GameplayFragment : Fragment() {
         if (!binding!!.col7.isEmpty) count++
         if (!binding!!.col8.isEmpty) count++
         if (!binding!!.col9.isEmpty) count++
+
+        if (count == 9) {
+            playAnimation(binding!!.col1)
+            playAnimation(binding!!.col2)
+            playAnimation(binding!!.col3)
+            playAnimation(binding!!.col4)
+            playAnimation(binding!!.col5)
+            playAnimation(binding!!.col6)
+            playAnimation(binding!!.col7)
+            playAnimation(binding!!.col8)
+            playAnimation(binding!!.col9)
+        }
 
         return count == 9
     }
@@ -567,6 +579,15 @@ class GameplayFragment : Fragment() {
             Log.i(GameplayFragment_pvp_TAG, "$P2_LOSES_FILE_NAME file created")
             requireContext().openFileOutput(P2_LOSES_FILE_NAME, Context.MODE_PRIVATE)
                 .write("0".toByteArray())
+        }
+    }
+
+    private fun playAnimation(col: Column) {
+        col.apply {
+            animation = AlphaAnimation(0.0F, 1.0F)
+            animation.duration = 1000L
+            animation.repeatCount = 2
+            startAnimation(animation)
         }
     }
 

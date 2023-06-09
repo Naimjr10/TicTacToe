@@ -17,8 +17,7 @@ class Column(context: Context,
 
 
     init {
-        val typedArray =
-            context.obtainStyledAttributes(attrs, R.styleable.Column)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.Column)
         isEmpty = typedArray.getBoolean(R.styleable.Column_isEmpty, true)
         filledBy = ""
         typedArray.recycle()
