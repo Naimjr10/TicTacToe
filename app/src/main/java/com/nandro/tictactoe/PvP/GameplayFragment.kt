@@ -11,9 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.nandro.tictactoe.customview.Column
 import com.nandro.tictactoe.R
@@ -26,7 +29,7 @@ import java.io.File
 
 class GameplayFragment : Fragment() {
     private var binding: FragmentPvpGameplayBinding? = null
-    private lateinit var onTurn: String
+    private var onTurn = MutableLiveData("")
     private var theWinner = ""
 
     private lateinit var p1NumOfWins: String
@@ -48,10 +51,10 @@ class GameplayFragment : Fragment() {
         player2CharGame = requireArguments().getString(PLAYER2_CHAR_GAME_KEY)
 
         if (firstPlay == PLAYER_1) {
-            onTurn = PLAYER_1
+            onTurn.value = PLAYER_1
         }
         if (firstPlay == PLAYER_2) {
-            onTurn = PLAYER_2
+            onTurn.value = PLAYER_2
         }
 
         createFiles() // Create files if the files don't exist
@@ -84,9 +87,33 @@ class GameplayFragment : Fragment() {
         return binding!!.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.i(GameplayFragment_pvp_TAG, "onCreate()")
+
+        onTurn.observe(viewLifecycleOwner) {
+            if (it == PLAYER_1) {
+                binding!!.player1CharImage.apply {
+                    animation = AlphaAnimation(0.0F, 1.0F)
+                    animation.duration = 1000L
+                    animation.repeatCount = Animation.INFINITE
+                    startAnimation(animation)
+                }
+                binding!!.player2CharImage.clearAnimation()
+            }
+            if (it == PLAYER_2) {
+                binding!!.player2CharImage.apply {
+                    animation = AlphaAnimation(0.0F, 1.0F)
+                    animation.duration = 1000L
+                    animation.repeatCount = Animation.INFINITE
+                    startAnimation(animation)
+                }
+                binding!!.player1CharImage.clearAnimation()
+            }
+            if (it == "") {
+                binding!!.player1CharImage.clearAnimation()
+                binding!!.player2CharImage.clearAnimation()
+            }
+        }
 
         binding!!.col1.setOnClickListener {
             Log.i(GameplayFragment_pvp_TAG, "${it.contentDescription}.setOnClickListener{}")
@@ -202,6 +229,7 @@ class GameplayFragment : Fragment() {
 
         // Check whether the game is over
         if (isGameOver()) {
+            onTurn.value = ""
             makeGameplayNotClickable()
             object : CountDownTimer(3000, 1000) {
                 override fun onTick(p0: Long) {}
@@ -218,14 +246,14 @@ class GameplayFragment : Fragment() {
         Log.i(GameplayFragment_pvp_TAG, "fillTheColumn()")
 
         // Check who fill the column
-        if (onTurn == PLAYER_1) {
+        if (onTurn.value == PLAYER_1) {
             colFilledByP1(column)
-            onTurn = PLAYER_2
-            Log.i(GameplayFragment_pvp_TAG, "onTurn = $onTurn")
+            onTurn.value = PLAYER_2
+            Log.i(GameplayFragment_pvp_TAG, "onTurn.value = $onTurn.value")
         } else {
             colFilledByP2(column)
-            onTurn = PLAYER_1
-            Log.i(GameplayFragment_pvp_TAG, "onTurn = $onTurn")
+            onTurn.value = PLAYER_1
+            Log.i(GameplayFragment_pvp_TAG, "onTurn.value = $onTurn.value")
         }
     }
 
