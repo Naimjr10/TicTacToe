@@ -97,6 +97,10 @@ class GameSettingFragment : Fragment() {
                         putString(PLAYER1_CHAR_GAME_KEY, player1CharGame)
                         putString(PLAYER2_CHAR_GAME_KEY, player2CharGame)
                     }
+                    firstPlay.value = ""
+                    player1CharGame = ""
+                    player2CharGame = ""
+
                     findNavController().navigate(
                         R.id.action_pvp_gameSettingFragment_to_pvp_gameplayFragment,
                         bundle)
