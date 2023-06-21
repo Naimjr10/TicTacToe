@@ -2,6 +2,7 @@ package com.nandro.tictactoe.pvp
 
 import android.app.Dialog
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -122,6 +123,7 @@ class GameplayFragment : Fragment() {
             // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
+                MediaPlayer.create(requireContext(), R.raw.mech_keyboard_02_102918).start()
                 it.isEmpty = false
             }
             // Check whether the game is over
@@ -129,7 +131,9 @@ class GameplayFragment : Fragment() {
                 onTurn.value = ""
                 makeGameplayNotClickable()
                 object : CountDownTimer(3000, 1000) {
-                    override fun onTick(p0: Long) {}
+                    override fun onTick(p0: Long) {
+                        MediaPlayer.create(requireContext(), R.raw.interface_124464).start()
+                    }
                     override fun onFinish() {
                         prompt()
                         updatePlayersProfile()
@@ -145,6 +149,7 @@ class GameplayFragment : Fragment() {
             // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
+                MediaPlayer.create(requireContext(), R.raw.mech_keyboard_02_102918).start()
                 it.isEmpty = false
             }
             // Check whether the game is over
@@ -152,7 +157,9 @@ class GameplayFragment : Fragment() {
                 onTurn.value = ""
                 makeGameplayNotClickable()
                 object : CountDownTimer(3000, 1000) {
-                    override fun onTick(p0: Long) {}
+                    override fun onTick(p0: Long) {
+                        MediaPlayer.create(requireContext(), R.raw.interface_124464).start()
+                    }
                     override fun onFinish() {
                         prompt()
                         updatePlayersProfile()
@@ -168,6 +175,7 @@ class GameplayFragment : Fragment() {
             // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
+                MediaPlayer.create(requireContext(), R.raw.mech_keyboard_02_102918).start()
                 it.isEmpty = false
             }
             // Check whether the game is over
@@ -175,7 +183,9 @@ class GameplayFragment : Fragment() {
                 onTurn.value = ""
                 makeGameplayNotClickable()
                 object : CountDownTimer(3000, 1000) {
-                    override fun onTick(p0: Long) {}
+                    override fun onTick(p0: Long) {
+                        MediaPlayer.create(requireContext(), R.raw.interface_124464).start()
+                    }
                     override fun onFinish() {
                         prompt()
                         updatePlayersProfile()
@@ -191,6 +201,7 @@ class GameplayFragment : Fragment() {
             // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
+                MediaPlayer.create(requireContext(), R.raw.mech_keyboard_02_102918).start()
                 it.isEmpty = false
             }
             // Check whether the game is over
@@ -198,7 +209,9 @@ class GameplayFragment : Fragment() {
                 onTurn.value = ""
                 makeGameplayNotClickable()
                 object : CountDownTimer(3000, 1000) {
-                    override fun onTick(p0: Long) {}
+                    override fun onTick(p0: Long) {
+                        MediaPlayer.create(requireContext(), R.raw.interface_124464).start()
+                    }
                     override fun onFinish() {
                         prompt()
                         updatePlayersProfile()
@@ -214,6 +227,7 @@ class GameplayFragment : Fragment() {
             // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
+                MediaPlayer.create(requireContext(), R.raw.mech_keyboard_02_102918).start()
                 it.isEmpty = false
             }
             // Check whether the game is over
@@ -221,7 +235,9 @@ class GameplayFragment : Fragment() {
                 onTurn.value = ""
                 makeGameplayNotClickable()
                 object : CountDownTimer(3000, 1000) {
-                    override fun onTick(p0: Long) {}
+                    override fun onTick(p0: Long) {
+                        MediaPlayer.create(requireContext(), R.raw.interface_124464).start()
+                    }
                     override fun onFinish() {
                         prompt()
                         updatePlayersProfile()
@@ -237,6 +253,7 @@ class GameplayFragment : Fragment() {
             // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
+                MediaPlayer.create(requireContext(), R.raw.mech_keyboard_02_102918).start()
                 it.isEmpty = false
             }
             // Check whether the game is over
@@ -244,7 +261,9 @@ class GameplayFragment : Fragment() {
                 onTurn.value = ""
                 makeGameplayNotClickable()
                 object : CountDownTimer(3000, 1000) {
-                    override fun onTick(p0: Long) {}
+                    override fun onTick(p0: Long) {
+                        MediaPlayer.create(requireContext(), R.raw.interface_124464).start()
+                    }
                     override fun onFinish() {
                         prompt()
                         updatePlayersProfile()
@@ -260,6 +279,7 @@ class GameplayFragment : Fragment() {
             // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
+                MediaPlayer.create(requireContext(), R.raw.mech_keyboard_02_102918).start()
                 it.isEmpty = false
             }
             // Check whether the game is over
@@ -267,7 +287,9 @@ class GameplayFragment : Fragment() {
                 onTurn.value = ""
                 makeGameplayNotClickable()
                 object : CountDownTimer(3000, 1000) {
-                    override fun onTick(p0: Long) {}
+                    override fun onTick(p0: Long) {
+                        MediaPlayer.create(requireContext(), R.raw.interface_124464).start()
+                    }
                     override fun onFinish() {
                         prompt()
                         updatePlayersProfile()
@@ -283,6 +305,7 @@ class GameplayFragment : Fragment() {
             // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
+                MediaPlayer.create(requireContext(), R.raw.mech_keyboard_02_102918).start()
                 it.isEmpty = false
             }
             // Check whether the game is over
@@ -290,7 +313,9 @@ class GameplayFragment : Fragment() {
                 onTurn.value = ""
                 makeGameplayNotClickable()
                 object : CountDownTimer(3000, 1000) {
-                    override fun onTick(p0: Long) {}
+                    override fun onTick(p0: Long) {
+                        MediaPlayer.create(requireContext(), R.raw.interface_124464).start()
+                    }
                     override fun onFinish() {
                         prompt()
                         updatePlayersProfile()
@@ -306,6 +331,7 @@ class GameplayFragment : Fragment() {
             // Check whether the column is empty
             if (it.isEmpty) {
                 fillTheColumn(it)
+                MediaPlayer.create(requireContext(), R.raw.mech_keyboard_02_102918).start()
                 it.isEmpty = false
             }
             // Check whether the game is over
@@ -313,7 +339,9 @@ class GameplayFragment : Fragment() {
                 onTurn.value = ""
                 makeGameplayNotClickable()
                 object : CountDownTimer(3000, 1000) {
-                    override fun onTick(p0: Long) {}
+                    override fun onTick(p0: Long) {
+                        MediaPlayer.create(requireContext(), R.raw.interface_124464).start()
+                    }
                     override fun onFinish() {
                         prompt()
                         updatePlayersProfile()

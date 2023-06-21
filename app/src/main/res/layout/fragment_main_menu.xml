@@ -17,6 +17,7 @@
         android:background="@color/white"/>
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/tictactoe_logo_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/tic_tac_toe_logo"
