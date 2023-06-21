@@ -1,8 +1,18 @@
 # Tic-Tac-Toe
-A Tic-Tac-Toe game  
+A Tic-Tac-Toe game.
+
+![main_menu.jpg](app/screenshot/main_menu.jpg).
+
+![game_setting.jpg](app/screenshot/game_setting.jpg).
+
+![game_setting2.jpg](app/screenshot/game_setting2.jpg).
+
+![gameplay.jpg](app/screenshot/gameplay.jpg).
+
 You can download the Apk [here](https://drive.google.com/file/d/17GfTJLOuLWQhLHdDVfOme-Re54QGoIZS/view?usp=sharing).
 
-Asset source :
+Asset source :.
+
 [lingkaran.png](app/src/main/res/drawable/) from [here](https://www.pngwing.com/en/free-png-kbndf).
 
 [silang.png](app/src/main/res/drawable/) from [here](https://www.pngwing.com/en/free-png-kbndf).
